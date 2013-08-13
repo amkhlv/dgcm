@@ -71,14 +71,6 @@
    (elemtag label (number->string (exercise-next label))))
 @(define (ex-ref label)
    (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
-@; @(define exercise-number 0)
-@; @(define ex-hash (make-hash))
-@; @(define (ex-num label) 
-@;    (set! exercise-number (+ 1 exercise-number))
-@;    (hash-set! ex-hash label exercise-number)
-@;    (elemtag label (number->string exercise-number)))
-@; @(define (ex-ref label)
-@;    (elemref label (string-append "Exercise " (number->string (hash-ref ex-hash label)))))
 
 @title{Manifolds}
 Here we will review basic notions from the theory of smooth manifolds.
@@ -698,11 +690,6 @@ This operation respects the composition of morphisms, as a functor should --- se
 }
 }
 
-@slide["Eraseme" #:tag "Eraseme" #:showtitle #t]{
-
-See @ex-ref{VelocityDoesNotDependOnChart}.
-
-}
 
 
 @; ---------------------------------------------------------------------------------------------------
