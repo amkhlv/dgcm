@@ -1,0 +1,12 @@
+# Ignore everything in this directory
+*.pdf
+*.sqlite
+proposta_disciplina_2013.odt
+*.css
+texput.*
+*.log
+*.aux
+*.out
+scribble-common.js
+# Except this file
+!.gitignore
