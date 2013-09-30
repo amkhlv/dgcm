@@ -2,7 +2,9 @@
 Differential Geometry and Classical Mechanics
 =============================================
 
-Here are notes for a course I am giving at [IFT UNESP](http://www.ift.unesp.br).
+Here is the source code for the [notes for a course](http://andreimikhailov.com/teaching/gdmc/index.html) 
+which I am giving at [IFT UNESP](http://www.ift.unesp.br).
+
 
 This is only partial, and work in progress. 
 
