@@ -1,4 +1,3 @@
-# Ignore everything in this directory
 *.pdf
 *.sqlite
 proposta_disciplina_2013.odt
@@ -8,5 +7,9 @@ texput.*
 *.aux
 *.out
 scribble-common.js
-# Except this file
-!.gitignore
+server-log.txt
+server-error.txt
+plan-in-english.*
+students.db
+students.yaml
+_region_.*

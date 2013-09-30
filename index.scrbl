@@ -1,15 +1,28 @@
 #lang scribble/base
 @(require scribble/core scribble/html-properties scriblib/render-cond)
-@(require amkhlv/bystroTeX/common amkhlv/scribble/common amkhlv/scribble/sqli)
-@(amkhlv/init-scrbl)
+@(require amkhlv/bystroTeX/common)
 
-@amkhlv/style{no-margin.css}
 
-@title[#:style '(no-toc no-sidebar)]{Geometria Diferencial e Mecânica Clássica}
+
+@title[#:style '(no-toc no-sidebar)]{Differential geometry and classical mechanics}
 
 Andrei Mikhailov, IFT UNESP
 
-I will put here @bold{some} notes. This is @spn[attn]{under construction}.
+I will put here @bold{some} notes. This is @bold{under construction}.
 
 @hyperlink["manifold/index.html"]{Smooth manifolds}
 
+@hyperlink["exterior-calculus/index.html"]{Exterior calculus}
+
+@hyperlink["diff-forms/index.html"]{Differential forms, integration, exterior derivative}
+
+@hyperlink["vector-fields/index.html"]{Vector fields and Lie derivative}
+
+@hyperlink["symplectic-and-poisson-structures/index.html"]{Symplectic and Poisson manifolds}
+
+
+@linebreak[]
+@linebreak[]
+@linebreak[]
+
+@hyperlink["todo.html"]{TODO list}

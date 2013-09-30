@@ -1,0 +1,163 @@
+% -*- andrei: LuaLaTeX -*-
+\documentclass[12pt]{article}
+\input{/home/andrei/a/other/emacs/tex-outline-hat.tex}
+
+\usepackage{fontspec}
+
+
+% NOTE: C-c C-c bound to LuaLaTeX
+
+\begin{document} 
+\section{Andrey Yuryevich Mikhaylov. Proposta de disciplina para o ano de 2013}
+
+Proponho uma nova disciplina: 
+\begin{center}
+{\bf Geometria diferencial e mecânica clássica}
+\end{center}
+
+\subsection{Justificativa}
+Neste ano dei aulas da Mecânica Clássica. Só assistiram 3 alunos + 1 
+voluntário. Acontece que a maioria dos alunos já tiveram algum curso da 
+Mecânica Clássica, principalmente usando o livro do Prof. Goldstein. Até os 
+meus 3 alunos já assistiram o curso de Goldstein. Então resolvi usar o livro 
+do Arnold, e tratei principalmente as applicações da geometria diferencial na 
+mecânica clássica.
+
+\subsection{Proposta}
+No futuro, proponho {\bf mudar o currículo do IFT}:
+
+\begin{enumerate}
+   \item Cancelar o curso da Mecânica Clássica, porque a grande maioria dos 
+      alunos já sabem tudo isso
+   \item Em vez de Mecânica Clássica, introduzir a disciplina nova:
+      \begin{itemize}
+      \item {\large \bf Geometria diferencial e mecânica clássica}
+      \end{itemize}
+      Esta disciplina servirá introdução à geometria diferencial, 
+      principalmente os apectos dela mais usados na Física Teórica. Também, 
+      para aqueles alunos que precisarem, vou explicar todos os elementos 
+      necessários da mecânica clássica.
+   \item Aquela nova disciplina pode ser pré-requisito 
+      para ``Relatividade Geral'', e talvez para
+      ``Introdução a Supersimetria''.
+\end{enumerate}
+Esta disciplina vai desenvolver as duas disciplinas que já ensinei no IFT,
+``Differential geometry for physics'' e ``Mecânica Clássica''.
+
+\eject
+
+\section{O plano da disciplina}
+\begin{enumerate}
+\item Variedades diferenciáveis
+   \begin{enumerate}
+   \item Definição e exemplos
+   \item Espaço tangente
+   \item Formas diferenciais
+      \begin{itemize}
+      \item Formas diferenciais e difeomorfismos
+      \item Integração
+      \item Derivada exterior e formula de Stokes
+      \item Derivada de Lie e a sua relação com a derivada exterior
+      \item Cohomologia de de Rham
+      \end{itemize}
+   \end{enumerate}
+\item Fluxo 1-parametrico
+   \begin{enumerate}
+   \item Definição e relação com a teoria das equações diferenciais ordinárias
+   \item Grupo de difeomorfismos
+   \item Correspondência entre campos vetoriais, fluxos, e operadores 
+      diferenciais lineares
+   \end{enumerate}
+\item Grupos e álgebras de Lie
+   \begin{enumerate}
+   \item Definição de Grupo de Lie e o papel deles na Física Teórica
+   \item Álgebras de Lie
+      \begin{itemize}
+      \item Relação entre álgebras de Lie e grupos de Lie
+      \item Álgebras de Lie abstratos
+      \item Álgebras de campos vetoriais; interpretação algébrica da derivada
+         exterior
+      \end{itemize}
+   \item Espaços homogénicos
+   \end{enumerate}
+\item Princípio de Mínima Ação
+   \begin{enumerate}
+   \item Ação, princípio variacional, equações de movimento
+   \item Teorema de Noether
+   \end{enumerate}
+\item Mecânica Hamiltoniana
+   \begin{enumerate}
+   \item Variedades simpléticas
+      \begin{itemize}
+      \item Definição da estrutura simplética
+      \item Definição da estrutura de Poisson e a sua relação com a estrutura
+         simplética
+      \item Identidade de Jacobi e a sua interpretação geométrica
+      \end{itemize}
+   \item Derivação do formalismo Hamiltoniano a partir do princípio 
+      de Mínima Ação
+      \begin{itemize}
+      \item Espaço de fase é o espaço de trajetórias clássicas
+      \item A forma simplética do ponto de vista do princípio variacional
+      \item Campos vetoriais Hamiltonianos
+      \end{itemize}
+   \item Geometria do espaço de fase
+      \begin{itemize}
+      \item Teorema de Darboux
+      \item Espaço de fase aumentado e invariantos integrais
+      \item Transformações canónicas; transformações canónicas que incluem o 
+         tempo
+      \item Estruturas de Poisson degeneradas, folhas simpléticas, redução 
+         Hamiltoniana
+      \end{itemize}
+   \end{enumerate}
+\item Metodo de Hamilton e Jacobi
+   \begin{enumerate}
+   \item Equações diferenciais quase-lineares
+   \item Equações diferenciais non-lineares
+   \item Estruturas de contato
+   \item Superfícies envelopantes e características
+   \item Interpretação do ponto de visto das transformações canónicas
+   \item Princípio de Maupertuis
+   \end{enumerate}
+\item Sistemas integraveis e suas perturbações
+   \begin{enumerate}
+   \item Teorema de Liouville
+   \item Relação com a teoria de Hamilton e Jacobi
+   \item Prova da teorema de Liouville
+   \item Variaveis de ação: prova da existência
+   \item Variaveis de ação: construção
+   \item Invariantos adiabáticos
+   \item Teoría de perturbações; discução da teoria KAM
+   \end{enumerate}
+\end{enumerate}
+
+\section{Demais informações}
+Number of credits: 12 (4 mêses)
+
+\section{Bibliografia}
+Nós vamos usar o livro do V.I.Arnold 
+``Mathematical methods of classical mechanics'', mas com muito preocupação. 
+Este livro é escrito para matemáticos. Para que usá-lo no ensino da Física 
+Teórica, tive que modificá-lo consideravelmente. Principalmente, o curso dele
+tem os problemas seguintes:
+\begin{enumerate}
+\item O objetivo (quase principal) dele é desenvolver a Mecânica Clássica
+   para usá-la como a ferramenta para provar teorémas matemáticas. Nós não
+   temos aquele objetivo, temos outros objetivos
+\item As vezes, ele introduze os objetos do jeito ``axiomático'', sem nenhuma
+   lógica. No ensino da Física Teórica, nós temos que seguir a lógica interna
+   da nossa disciplina, sempre explicando de onde as coisas vêm
+\item Acho que as vezes, as provas dele são demais complicadas; isso pode ser
+   necessário no ensino matemático, para conseguir o rigor absoluto; nós não
+   temos tal objetivo
+\end{enumerate}
+Acho que consegui, pelo menos parcialmente, corrigir estas faltas. 
+
+Nós vamos também usar algums capítulos do outro livro dele que se chama 
+``Ordinary differential equations''. 
+
+Também vamos usar algums capítulos do livro: S.P.Novikov 
+``Modern geometry: Methods and Applications''.
+
+\end{document}

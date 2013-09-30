@@ -80,6 +80,9 @@
 @title{Exterior calculus}
 
 @bystro-toc[]
+@linebreak[]
+@linebreak[]
+@hyperlink["../index.html"]{go back to main page}
 
 @slide["Grassmann algebra" #:tag "GrassmannAlgebra" #:showtitle #t]{
 @table-of-contents[]

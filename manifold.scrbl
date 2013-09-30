@@ -4,16 +4,22 @@
 @(require (planet amkhlv/bystroTeX/common) (planet amkhlv/bystroTeX/slides))
 @(require (only-in (planet jaymccarthy/sqlite) close))
 
+
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
-@(begin
-   (set-bystro-formula-processor! bystro-conf (find-executable-path "amkhlv-java-formula.sh"))
-   (set-bystro-formula-database-name! bystro-conf "formulas.sqlite")
-   (set-bystro-formula-dir-name! bystro-conf "formulas")
-   (set-bystro-formula-size! bystro-conf 25)
-   (set-bystro-autoalign-adjust! bystro-conf 2)
-   (set-bystro-manual-base-alignment! bystro-conf 0)
-   )
+@(define bystro-conf 
+   (bystro (find-executable-path "amkhlv-java-formula.sh")
+           "manifold_formulas.sqlite"  ; name for the database
+           "manifold_formulas" ; directory where to store .png files of formulas
+           25  ; formula size
+           2   ; automatic alignment adjustment
+           0   ; manual alignment adjustment
+           ))
+@(begin ;do not change here:
+   (define (start-formula-database)
+       (configure-bystroTeX-using bystro-conf)
+       (bystro-initialize-formula-collection bystro-conf))
+   (define formula-database (start-formula-database)))
 @; ---------------------------------------------------------------------------------------------------
 @; This controls the single page mode:
 @(define singlepage-mode #f)
@@ -56,7 +62,6 @@
 @; INITIALIZATION (please do not change anything in this part!):
 @(unless (bystro-formula-processor bystro-conf)
    (error "*** could not find executable for formula processing ***"))
-@(define formula-database (bystro-initialize-formula-collection))
 @(defineshiftedformula "formula-enormula-humongula!")
 @(bystro-titlepage-init #:singlepage-mode singlepage-mode)
 @; ---------------------------------------------------------------------------------------------------
@@ -76,6 +81,9 @@
 Here we will review basic notions from the theory of smooth manifolds.
 
 @bystro-toc[]
+@linebreak[]
+@linebreak[]
+@hyperlink["../index.html"]{go back to main page}
 
 
 @slide["What is manifold?" #:tag "DefManifoldIntro" #:showtitle #t]{
