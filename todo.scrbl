@@ -73,6 +73,7 @@
 
 @itemlist[#:style 'ordered
 @item{Explain notations @f{\Gamma(\Lambda^mTX)} @italic{etc.}}
+@item{Prove the Frobenius criterium; introduce the Frobenius form}
 ]
 
 @; ---------------------------------------------------------------------------------------------------

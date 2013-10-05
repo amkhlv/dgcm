@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REG="manifold exterior-calculus diff-forms vector-fields symplectic-and-poisson-structures"
+REG="manifold exterior-calculus diff-forms vector-fields symplectic-and-poisson-structures classical-mechanics"
 
 cp index.html ~/a/other/server/www-data/scribbles/teaching/gdmc/
 cp todo.html ~/a/other/server/www-data/scribbles/teaching/gdmc/

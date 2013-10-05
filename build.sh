@@ -7,3 +7,4 @@ scribble --htmls manifold.scrbl
 scribble --htmls exterior-calculus.scrbl
 scribble --htmls vector-fields.scrbl
 scribble --htmls symplectic-and-poisson-structures.scrbl
+scribble --htmls classical-mechanics.scrbl
