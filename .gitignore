@@ -6,6 +6,7 @@ texput.*
 *.log
 *.aux
 *.out
+*.html
 scribble-common.js
 server-log.txt
 server-error.txt

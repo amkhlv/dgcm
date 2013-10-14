@@ -22,6 +22,8 @@ I will put here @bold{some} notes. This is @bold{under construction}.
 
 @hyperlink["classical-mechanics/index.html"]{Phase space in classical mechanics}
 
+@hyperlink["Hamilton-Jacobi/index.html"]{Hamilton-Jacobi theory}
+
 @linebreak[]
 @linebreak[]
 @linebreak[]

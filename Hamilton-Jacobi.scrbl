@@ -103,7 +103,9 @@ Consider a function @f{u(x,y)} of two variables @f{(x,y)\in {\bf R}^2}.
 
 
 @bold{Definition @defn-num{QPDE}:} 
-A @spn[attn]{quasilinear partial differential equation} is an equation of the following form:
+We will consider, as an illustrative example, the case of QPDE in two dimensions.
+
+A @spn[attn]{quasilinear partial differential equation} (in 2d) is an equation of the following form:
 @equation[#:label "QuasilinearPDE"]{
    au_x + bu_y = c
 }
@@ -111,18 +113,53 @@ where @f{a}, @f{b} and @f{c} are functions of @f{x,y,u}.
 
 @bold{Definition @defn-num{CharacteristicCurvesOfQPDE}:}
 @spn[attn]{Characteristic curves} are solutions of the following system of differential equations:
-@align[r.l @list[
-@f{{dx\over dt} = \;}@f{a}
+@align[r.l.n @list[
+@f{{dx\over dt} = \;}@f{a(x,y,u)} ""
 ]@list[
-@f{{dy\over dt} =\;}@f{b}
+@f{{dy\over dt} =\;}@f{b(x,y,u)} @label{CharCurves}
 ]@list[
-@f{{du\over dt} =\;}@f{c}
+@f{{du\over dt} =\;}@f{c(x,y,u)} ""
 ]]
+The @bold{characteristic vector field} is:
+@equation[#:label "DefCharacteristicVectorField"]{
+v = a {\partial\over\partial x} + b {\partial\over\partial y} + c{\partial\over\partial u}
+}
 @div[redbox]{
 To construct a solution of the quasilinear PDE, it is enough
 to specify a curve @f{(x(s), y(s), u(s))} and consider all the characteristic
 curves passing through it. These curves will sweep the graph of @f{u(x,y)}.
 }
+@div[comment]{To be more precise: the initial curve @f{(x(s), y(s), u(s))} should be non-characteristic,
+@italic{i.e.} the characteristic curves should @bold{not} be tangent to it. (Otherwize we would not get
+a two-dimensional surface.)}
+Let us prove it.
+Consider a given solution @f{u = u_0(x,y)} of (@ref{QuasilinearPDE}). Let us look at the
+@spn[attn]{graph} of this solution. The graph is the surface  @f{\Sigma \subset {\bf R}^3_{x,y,u}\;\;\;\;} given by the
+equation:
+@equation[#:label "DefGraph"]{
+\Sigma\;:\;\; u - u_0(x,y) = 0
+}
+The statement follows immediately from the following reformulation:
+
+@bold{Lemma.} Eq. (@ref{QuasilinearPDE}) is equivalent to the statement that the
+characteristic vector field (@ref{DefCharacteristicVectorField}) is tangent to the graph (@ref{DefGraph}):
+@equation[#:label "VTangentToSigma"]{
+v\in T\;\Sigma
+}
+@bold{Proof.} This is equivalent to the following statement:
+@itemlist[
+@item{If @f{\Phi(x,y,u) = 0} is an equation determining the surface @f{\Sigma}, then @f{{\cal L}_v\Phi =\alpha\Phi}
+where @f{\alpha = \alpha(x,y,u)} is some function.}
+]
+@(fsize+ (- 3))
+@div[comment]{That is to say, the Lie derivative of @f{\Phi} along @f{v} should be zero on the surface @f{\Phi = 0}}
+@(fsize=)
+In particular, we can choose @f{\Phi = u - u_0(x,y)}. Evaluation of @f{{\cal L}_v\Phi} gives:
+@equation{
+{\cal L}_v \Phi(x,y,u) = c(x,y,u) 
+- a(x,y,u) {\partial u_0(x,y)\over \partial x} - b(x,y,u) {\partial u_0(x,y)\over \partial y}
+}
+Vanishing of this expression on the surface @f{u = u_0(x,y)} is equivalent to  (@ref{QuasilinearPDE}).
 
 
 }
