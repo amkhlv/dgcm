@@ -1,0 +1,11 @@
+htmls:
+  - manifold 
+  - exterior-calculus 
+  - diff-forms 
+  - vector-fields 
+  - symplectic-and-poisson-structures
+  - classical-mechanics
+  - Hamilton-Jacobi
+html:
+  - index
+  - todo

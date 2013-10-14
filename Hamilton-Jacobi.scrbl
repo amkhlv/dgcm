@@ -9,8 +9,8 @@
 @; User definitions:
 @(define bystro-conf 
    (bystro (find-executable-path "amkhlv-java-formula.sh")
-           "formulas.sqlite"  ; name for the database
-           "formulas" ; directory where to store .png files of formulas
+           "Hamilton-Jacobi_formulas.sqlite"  ; name for the database
+           "Hamilton-Jacobi_formulas" ; directory where to store .png files of formulas
            25  ; formula size
            2   ; automatic alignment adjustment
            0   ; manual alignment adjustment
@@ -26,7 +26,7 @@
 @; ---------------------------------------------------------------------------------------------------
 @; it is possible to define new functions:
 @(begin
-   (define (label s) (elemtag s (number-for-formula s)))
+   (define (label s) (elemtag s (number-for-formula s)))  
    (define (ref s) (elemref s (ref-formula s)))
    (define (red . x) (apply clr (cons "red" x)))
    (define (green . x) (apply clr (cons "green" x)))
@@ -69,16 +69,65 @@
 @; ---------------------------------------------------------------------------------------------------
 @; AND HOPEFULLY SOME CONTENT:
 
-@title{TODO list}
 
-@itemlist[#:style 'ordered
-@item{Explain notations @f{\Gamma(\Lambda^mTX)} @italic{etc.}}
-@item{Prove the Frobenius criterium; introduce the Frobenius form}
-]
+@(require racket/dict)
+
+@(init-counter exercise)
+@(define (ex-num label)
+   (elemtag label (number->string (exercise-next label))))
+@(define (ex-ref label)
+   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
+
+@(init-counter theorem)
+@(define (th-num label)
+   (elemtag label (number->string (theorem-next label))))
+@(define (th-ref label)
+   (elemref label (string-append "Theorem " (number->string (theorem-number label)))))
+
+@(init-counter defn)
+@(define (defn-num label)
+   (elemtag label (number->string (defn-next label))))
+@(define (defn-ref label)
+   (elemref label (string-append "Definition " (number->string (defn-number label)))))
+
+@title{Hamilton-Jacobi theory}
+@bystro-toc[]
+@linebreak[]
+@linebreak[]
+@hyperlink["../index.html"]{go back to main page}
+
+@slide["Quasilinear PDE" #:tag "QuasilinearPDE" #:showtitle #t]{
+
+Consider a function @f{u(x,y)} of two variables @f{(x,y)\in {\bf R}^2}. 
+
+
+
+@bold{Definition @defn-num{QPDE}:} 
+A @spn[attn]{quasilinear partial differential equation} is an equation of the following form:
+@equation[#:label "QuasilinearPDE"]{
+   au_x + bu_y = c
+}
+where @f{a}, @f{b} and @f{c} are functions of @f{x,y,u}.
+
+@bold{Definition @defn-num{CharacteristicCurvesOfQPDE}:}
+@spn[attn]{Characteristic curves} are solutions of the following system of differential equations:
+@align[r.l @list[
+@f{{dx\over dt} = \;}@f{a}
+]@list[
+@f{{dy\over dt} =\;}@f{b}
+]@list[
+@f{{du\over dt} =\;}@f{c}
+]]
+@div[redbox]{
+To construct a solution of the quasilinear PDE, it is enough
+to specify a curve @f{(x(s), y(s), u(s))} and consider all the characteristic
+curves passing through it. These curves will sweep the graph of @f{u(x,y)}.
+}
+
+
+}
+
 
 @; ---------------------------------------------------------------------------------------------------
 
 @close[formula-database]
-
-
-
