@@ -12,6 +12,8 @@
            "symplectic-and-poisson-structures_formulas.sqlite"  ; name for the database
            "symplectic-and-poisson-structures_formulas" ; directory where to store .png files of formulas
            25  ; formula size
+           (list 255 255 255) ; formula background color
+           (list 0 0 0) ; formula foreground color
            2   ; automatic alignment adjustment
            0   ; manual alignment adjustment
            ))
