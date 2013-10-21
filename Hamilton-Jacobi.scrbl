@@ -210,16 +210,16 @@ included in the definition of the contact structure.
 Because of the non-degeneracy condition, the distribution @f{L = {\rm ker}(\alpha)} does not have integral manifolds
 of dimension @f{2n}. What about integral manifolds of the dimension @f{<2n}, would they exist?
 It turns out that, under the condition (@ref{NondegeneracyOfContactStructure}),  the maximal dimension of an integral 
-manifold is actually @f{n-1}.
+manifold is actually @f{n}.
 
 @bold{Definition @defn-num{LegendrianManifold}:}
-@spn[attn]{Legendrian manifolds} are integral manifolds of @f{L} of the dimension @f{n-1}.
+@spn[attn]{Legendrian manifolds} are integral manifolds of @f{L} of the dimension @f{n}.
 
 @section{How to build Legendrian manifolds}
 @subsection{Continuation problem}
-Suppose that we are given an integral manifold @f{K} of the dimension @f{n-2}, and we want to
+Suppose that we are given an integral manifold @f{K} of the dimension @f{n-1}, and we want to
 somehow continue it to a Legendrian manifold. In other words, we want to find an integral manifold @f{L}
-of the dimension @f{n-1}, such that @f{K\subset L}. Is such a continuation possible?
+of the dimension @f{n}, such that @f{K\subset L}. Is such a continuation possible?
 
 @div[comment]{
 This would be somewhat similar to the analytic continuation of a holomorphic surface, @italic{e.g.}
@@ -261,7 +261,7 @@ the @italic{direction} of @f{\xi} will not change. Therefore, this will not affe
 @subsection{Construction of @f{L}}
 @tabular[@list[@list[
 @para{Let us pass a characteristic through every point of @f{K}. 
-They will all sweep an @f{n-1}-dimensional submanifold @f{L}. We will now prove that @bold{this} @f{L} @bold{is Legendrian}, and
+They will all sweep an @f{n}-dimensional submanifold @f{L}. We will now prove that @bold{this} @f{L} @bold{is Legendrian}, and
 also that @f{F} is zero on @f{L}.
 We just have to prove that the restriction of @f{\alpha} on @f{TL} is zero.
 In other words @f{\alpha(v) = 0} for any @f{v} tangent to @f{L}. 
