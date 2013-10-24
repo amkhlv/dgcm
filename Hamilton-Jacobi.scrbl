@@ -30,23 +30,28 @@
 @(begin
    (define (label s) (elemtag s (number-for-formula s)))  
    (define (ref s) (elemref s (ref-formula s)))
-   (define (red . x) (apply clr (cons "red" x)))
-   (define (green . x) (apply clr (cons "green" x)))
-   (define (greenbox-style more) 
-     (bystro-elemstyle (string-append "border-style:solid;border-color:#00aa00;" more)))
-   (define (redbox-style more)   
-     (bystro-elemstyle (string-append "border-style:solid;border-color:#aa0000;" more)))
-   (define (greenbox more . x) (elem #:style (greenbox-style more) x))
-   (define (redbox   more . x) (para #:style (redbox-style more) x))
-   (define (greenbox-wide more . x) (nested #:style (greenbox-style more) x))
-   (define (redbox-wide   more . x) (nested #:style (redbox-style   more) x))
-   (define (hrule) (element (make-style #f (list (alt-tag "hr"))) ""))
-   (define (leftbar . x) 
-     (para 
-      #:style (bystro-elemstyle 
-               "border-left-style:solid;border-color:green;padding-left:12px;") 
-      x))
    )
+@(require racket/dict)
+
+@; We define some counters:
+@(init-counter exercise)
+@(define (ex-num label)
+   (elemtag label (number->string (exercise-next label))))
+@(define (ex-ref label)
+   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
+
+@(init-counter theorem)
+@(define (th-num label)
+   (elemtag label (number->string (theorem-next label))))
+@(define (th-ref label)
+   (elemref label (string-append "Theorem " (number->string (theorem-number label)))))
+
+@(init-counter defn)
+@(define (defn-num label)
+   (elemtag label (number->string (defn-next label))))
+@(define (defn-ref label)
+   (elemref label (string-append "Definition " (number->string (defn-number label)))))
+
 @; ---------------------------------------------------------------------------------------------------
 @; The basic syntax is somewhat tunable:
 @(define-syntax (defineshiftedformula x) 
@@ -71,27 +76,6 @@
 @; ---------------------------------------------------------------------------------------------------
 @; AND HOPEFULLY SOME CONTENT:
 
-
-@(require racket/dict)
-
-@(init-counter exercise)
-@(define (ex-num label)
-   (elemtag label (number->string (exercise-next label))))
-@(define (ex-ref label)
-   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
-
-@(init-counter theorem)
-@(define (th-num label)
-   (elemtag label (number->string (theorem-next label))))
-@(define (th-ref label)
-   (elemref label (string-append "Theorem " (number->string (theorem-number label)))))
-
-@(init-counter defn)
-@(define (defn-num label)
-   (elemtag label (number->string (defn-next label))))
-@(define (defn-ref label)
-   (elemref label (string-append "Definition " (number->string (defn-number label)))))
-
 @title{Hamilton-Jacobi theory}
 @bystro-toc[]
 @linebreak[]
@@ -101,8 +85,6 @@
 @slide["Quasilinear PDE" #:tag "QuasilinearPDE" #:showtitle #t]{
 
 Consider a function @f{u(x,y)} of two variables @f{(x,y)\in {\bf R}^2}. 
-
-
 
 @bold{Definition @defn-num{QPDE}:} 
 We will consider, as an illustrative example, the case of QPDE in two dimensions.
@@ -171,7 +153,7 @@ Vanishing of this expression on the surface @f{u = u_0(x,y)} is equivalent to  (
 @table-of-contents[]
 
 Our goal is to find some analogue of the characteristic curves for the nonlinear PDE:
-@equation{
+@equation[#:label "NonlinearPDE"]{
 F\left(x^{\mu},u, {\partial u\over\partial x^{\mu}}\right) = 0
 }
 We will need some new geometrical concept: the notion of  @bold{contact structure}. 
@@ -307,7 +289,97 @@ is the intersection of the characteristics passing through @f{y} with @f{K\subse
 Then Eq. (@ref{SolutionForAlphaOfV}) implies that @f{\alpha(v) = 0}, which is what we had to prove. 
 }
 
+@slide["Explicit description of the characteristic vector fields" #:tag "CharacteristicExplicit" #:showtitle #t]{
+Suppose that the contact form is:
+@equation{
+\alpha =  du - p_{m} dx^{m} 
+}
+@equation{
+   \xi = {\partial F\over\partial p_{m}}{\partial\over\partial x^{m}}
++ p_{\mu}{\partial F\over\partial p_{m}}{\partial\over\partial u} 
+-\left(
+   {\partial F\over\partial x^{m}} + p_{m}{\partial F\over\partial u}
+\right){\partial\over\partial p_{m}}
+}
+In other words:
+@align[r.l.n @list[
+@v+[12 @f{\dot{x}^{m} \;=\;}] @f{{\partial F\over\partial p_{m}}} ""
+]@list[
+@v+[4 @f{\dot{p}_{m} \;=\;}] @f{ - {\partial F\over\partial x^{m}} -  p_{m}{\partial F\over\partial u}} 
+@label{ExplicitCharacteristics}
+]@list[
+@v+[12 @f{\dot{u} \;=\;}] @f{ p_{m}{\partial F\over\partial p_{m}} } ""
+]]
+}
 
+@slide["How to reconstruct characteristics knowing the solutions of PDE" #:tag "ReconstructionOfCharacteristics" #:showtitle #t]{
+We have seen that solutions of PDE (@ref{NonlinearPDE}) could be obtained from knowing the characteristics curves.
+
+In classical mechanics, the inverse problem is often interesting: if we know solutions of PDE, can we reconstruct the
+characteristic curves?
+
+A solution is @f{u = u(x^1,\ldots,x^n)}. Knowing just @bold{one} solution does not allow to reconstruct characteristics.
+In fact, we need to know @bold{a family of solutions}. For example, for @f{n=2}, let us consider
+a 1-parameter family of solutions, parametrized by a parameter @f{s\in {\bf R}}, so we have
+@f{u = u_s(x^1,x^2)}:
+
+@(image (string->path "snapshots/envelope-small.png"))
+@; (setq amkhlv/snapshot-dir "/home/andrei/Samsung")
+
+The red lines are characteristics. Obviously, they are determined by the equation:
+@equation{
+{\partial u_s(x^1,x^2)\over \partial s} =0
+}
+Notice that the so obtained characteristics (red curves) span a two-dimensional surface,
+which can be considered as a graph of a new function @f{u= u_{\rm env}(x^1,x^2)}. This is, again,
+a solution of (@ref{NonlinearPDE}). This new solution is called the @bold{enveloping} of the family of solutions. 
+
+This way we got a 1-parameter family of characteristics. To get @bold{all} characteristics, we consider
+a 2-parameter family of solutions @f{u_{s_1,s_2}(x^1,x^2)}. For any 1-parameter @bold{sub-family}:
+@equation{
+u_{s_1(\sigma),s_2(\sigma)}(x^1,x^2)
+}
+we get a 1-parameter family of characteristics, given by:
+@equation{
+{\partial u_{s_1(\sigma),s_2(\sigma)}(x^1,x^2)\over \partial\sigma} = 0
+}
+This, again, swaps a 2-dimensional surface, which is again a solution of the PDE (@ref{NonlinearPDE}).
+
+Considering all possible curves @f{s_1(\sigma),s_2(\sigma)} in the parameter space, we get @bold{all solutions}
+of the nonlinear PDE (@ref{NonlinearPDE}).
+}
+
+@slide["Hamilton-Jacobi equation" #:tag "HamiltonJacobiEquation" #:showtitle #t]{
+Let us consider the following particular case of this construction. Let @f{M} be a @f{2n+3}-dimensional
+contact manifold with the coordinates @f{S, p_{\mu}, q^{\mu}}, and with the contact form defined like this:
+@equation{
+\alpha = dS - p_{\mu}dx^{\mu}
+}
+We will have @f{\mu} running from @f{0} to @f{n}. Also, use the following @f{F}:
+@equation{F = p_0 + H(\vec{p},\vec{q})}
+Then, the characteristic equations (@ref{ExplicitCharacteristics}) become:
+@align[r.l.n @list[
+@f{{d\over dt} p_0 \;=\;} @v+[5 @f{0}] @label{HamiltonianIsConstant}
+]@list[
+@f{{d\over dt} q^0 \;=\;} @v+[5 @f{1}] @label{VelocityOfX0}
+]@list[
+@f{{d\over dt}\vec{q} \;=\;} @v-[2 @f{{\partial F\over \partial \vec{p}}\;}] @label{FirstHamiltonEq}
+]@list[
+@f{{d\over dt}\vec{p} \;=\;} @v-[2 @f{- {\partial F\over \partial \vec{q}}\;}] @label{SecondHamiltonEq}
+]@list[
+@f{{d\over dt} S \;=\;} 
+@f{
+p_0 {\partial F\over \partial p_0} + \vec{p}{\partial F\over\partial\vec{p}}
+= -H(\vec{p},\vec{q}) + \vec{p} {d\over dt}\vec{q}
+}
+@label{VelocityOfAction}
+]]
+Notice that Eq. (@ref{VelocityOfX0}) tells us that @f{q^0} should be identified with @f{t}. 
+In this case the PDE (@ref{NonlinearPDE}) is:
+@equation[#:label "HamiltonJacobiEqn"]{
+{\partial S(\vec{q},t)\over \partial t} + H\left(\vec{q}, {\partial S\over \partial \vec{q}}\right) = 0
+}
+}
 
 
 
