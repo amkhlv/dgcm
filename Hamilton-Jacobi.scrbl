@@ -347,6 +347,9 @@ This, again, swaps a 2-dimensional surface, which is again a solution of the PDE
 
 Considering all possible curves @f{s_1(\sigma),s_2(\sigma)} in the parameter space, we get @bold{all solutions}
 of the nonlinear PDE (@ref{NonlinearPDE}).
+
+In general case of @f{u} function of @f{n} variables @f{x^1,\ldots,x^n}, we need to know an @f{n}-parameter
+family of solutions, in order to reconstruct a general solution and all characteristic. 
 }
 
 @slide["Hamilton-Jacobi equation" #:tag "HamiltonJacobiEquation" #:showtitle #t]{
