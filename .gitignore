@@ -1,7 +1,6 @@
 *.pdf
 *.sqlite
 proposta_disciplina_2013.odt
-*.css
 texput.*
 *.log
 *.aux

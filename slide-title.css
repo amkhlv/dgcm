@@ -1,0 +1,54 @@
+
+/* ----------------------------------------------- */
+/* The ones below modify the default scribble.css: */
+
+.main {
+  font-family: "serif";
+
+}
+
+.maincolumn {
+  font-size: 16pt;
+/*  width: 32em; */
+/*  margin-right: -40em; */
+  margin-left: 3em;
+}
+
+/* ---------------------------------------- */
+/* Table of contents, left margin */
+
+.tocview { display: none; }
+
+/* .tocset { */
+/*     font-size: 18pt; */
+/*   position: relative; */
+/*   float: left; */
+/*   width: 16em; */
+/*   margin-right: 2em; */
+/* } */
+/* .tocset td { */
+/*   vertical-align: text-top; */
+/* } */
+
+/* .tocview { */
+/*   text-align: left; */
+/*   background-color: #f0f0e0; */
+/* } */
+
+
+/* upper and lower bars */
+
+.navsettop {
+  background-color: #ffffff;
+  margin-top:    0em;
+  margin-bottom: 0.2em;
+  border-bottom: 0px solid #e0e0c0;
+  height: 0.2em;
+}
+
+.navsetbottom {
+  background-color: #ffffff;
+  margin-top: 0.2em;
+  border-top: 0px solid #e0e0c0;
+  height: 0.2em;
+}

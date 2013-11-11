@@ -1,0 +1,119 @@
+
+
+/* ----------------------------------------------- */
+/* The ones below modify the default scribble.css: */
+
+.main {
+  font-family: "DejaVu Sans";
+  font-size: 16pt;
+}
+
+.maincolumn {
+  font-size: 20pt;
+  width: 37em;
+/*  margin-right: -40em; */
+  margin-left: 5pt;
+}
+
+.SubFlow {
+  font-family: "DejaVu Sans";
+  font-size: 16pt;
+}
+
+/* ---------------------------------------- */
+/* Table of contents, left margin */
+
+.tocview { display: none; }
+
+.tocset { display: none; }
+/* .tocset { */
+/*   font-size: 18pt; */
+/*   position: relative; */
+/*   float: left; */
+/*   width: 12em; */
+/*   margin-right: 2em; */
+/* } */
+/* .tocset td { */
+/*   vertical-align: text-top; */
+/* } */
+
+/* .tocview { */
+/*   text-align: left; */
+/*   background-color: #f0f0e0; */
+/* } */
+
+
+
+/* ---------------------------------------- */
+/* Navigation */
+
+.navsettop, .navsetbottom {
+  background-color: #f0f0e0;
+
+}
+
+.navsettop {
+  margin-top:    0em;
+  margin-bottom: 0.2em;
+  border-bottom: 0px solid #e0e0c0;
+  height: 0.2em;
+}
+
+.navsetbottom {
+  margin-top: 0.2em;
+  border-top: 0px solid #e0e0c0;
+  height: 0.2em;
+}
+
+.navleft {
+  margin-left: 1ex;
+  position: relative;
+  float: left;
+  white-space: nowrap;
+}
+.navright {
+  font-size: 15pt;
+  margin-right: 1ex;
+  position: relative;
+  float: right;
+  white-space: nowrap;
+  padding: 0 0 0.7em 0;
+  margin-top: -0.8em;
+  /* Border is useful for debugging: */
+  /* border: 1px solid red; */
+  height: 0.8em;
+}
+
+
+/* For standard table: */
+table, th, td
+{
+  font-family: "DejaVu Sans";
+  font-size: 16pt;
+}
+
+/* and for my table: */
+.amktablecell {
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopleftcell {
+    border: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopcell {
+    border-top: 1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktableleftcell {
+    border-left:  1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
