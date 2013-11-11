@@ -7,10 +7,23 @@
 (define conf (call-with-input-file (string->path "REGISTRY.yaml") read-yaml))
 
 (for/list ([f (hash-ref conf "html")])
-  (copy-file 
-   (string-append f ".html")
-   (expand-user-path (string-append "~/a/other/server/www-data/scribbles/teaching/gdmc/" f ".html"))
-   #t))
+  (if (hash-has-key? f "dest")
+      (copy-file
+       (string-append (hash-ref f "dest") "/" (hash-ref f "name") ".html")
+       (expand-user-path (string-append 
+                          "~/a/other/server/www-data/scribbles/teaching/gdmc/" 
+                          (hash-ref f "dest") 
+                          "/"
+                          (hash-ref f "name") 
+                          ".html"))
+       #t)    
+      (copy-file 
+       (string-append (hash-ref f "name") ".html")
+       (expand-user-path (string-append 
+                          "~/a/other/server/www-data/scribbles/teaching/gdmc/" 
+                          (hash-ref f "name") 
+                          ".html"))
+       #t)))
 (for/list ([f (hash-ref conf "htmls")])
   (system 
    (string-append 

@@ -24,11 +24,13 @@ I will put here @bold{some} notes. This is @bold{under construction}.
 
 @hyperlink["Hamilton-Jacobi/index.html"]{Hamilton-Jacobi theory}
 
+@hyperlink["integrability/index.html"]{Liouville integrability}
+
 @linebreak[]
 @linebreak[]
 @linebreak[]
 
-@hyperlink["todo.html"]{TODO list}
+@hyperlink["todo/todo.html"]{TODO list}
 
 @linebreak[]
 

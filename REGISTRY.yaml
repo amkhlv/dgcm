@@ -6,6 +6,8 @@ htmls:
   - symplectic-and-poisson-structures
   - classical-mechanics
   - Hamilton-Jacobi
+  - integrability
 html:
-  - index
-  - todo
+  - name: index
+  - name: todo
+    dest: todo

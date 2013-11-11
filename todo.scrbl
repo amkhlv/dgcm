@@ -7,15 +7,15 @@
 
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
-@(define bystro-conf 
+@(define bystro-conf
    (bystro (find-executable-path "amkhlv-java-formula.sh")
-           "formulas.sqlite"  ; name for the database
+           "formulas.sqlite" ; name for the database
            "formulas" ; directory where to store .png files of formulas
-           25  ; formula size
+           25 ; formula size
            (list 255 255 255) ; formula background color
            (list 0 0 0) ; formula foreground color
-           2   ; automatic alignment adjustment
-           0   ; manual alignment adjustment
+           2 ; automatic alignment adjustment
+           0 ; manual alignment adjustment
            ))
 @(begin ;do not change here:
    (define (start-formula-database)
@@ -32,31 +32,31 @@
    (define (ref s) (elemref s (ref-formula s)))
    (define (red . x) (apply clr (cons "red" x)))
    (define (green . x) (apply clr (cons "green" x)))
-   (define (greenbox-style more) 
+   (define (greenbox-style more)
      (bystro-elemstyle (string-append "border-style:solid;border-color:#00aa00;" more)))
-   (define (redbox-style more)   
+   (define (redbox-style more)
      (bystro-elemstyle (string-append "border-style:solid;border-color:#aa0000;" more)))
    (define (greenbox more . x) (elem #:style (greenbox-style more) x))
-   (define (redbox   more . x) (para #:style (redbox-style more) x))
+   (define (redbox more . x) (para #:style (redbox-style more) x))
    (define (greenbox-wide more . x) (nested #:style (greenbox-style more) x))
-   (define (redbox-wide   more . x) (nested #:style (redbox-style   more) x))
+   (define (redbox-wide more . x) (nested #:style (redbox-style more) x))
    (define (hrule) (element (make-style #f (list (alt-tag "hr"))) ""))
-   (define (leftbar . x) 
-     (para 
-      #:style (bystro-elemstyle 
-               "border-left-style:solid;border-color:green;padding-left:12px;") 
+   (define (leftbar . x)
+     (para
+      #:style (bystro-elemstyle
+               "border-left-style:solid;border-color:green;padding-left:12px;")
       x))
    )
 @; ---------------------------------------------------------------------------------------------------
 @; The basic syntax is somewhat tunable:
-@(define-syntax (defineshiftedformula x) 
-   (bystro-formula-syntax 
+@(define-syntax (defineshiftedformula x)
+   (bystro-formula-syntax
     #:autoalign-formula-prefix "f"
-    #:manual-formula-prefix    "f"
-    #:display-math-prefix      "equation"
-    #:size-change-notation     "fsize"
-    #:size-increase-notation   "fsize+"
-    #:size-restore-notation    "fsize="
+    #:manual-formula-prefix "f"
+    #:display-math-prefix "equation"
+    #:size-change-notation "fsize"
+    #:size-increase-notation "fsize+"
+    #:size-restore-notation "fsize="
     x))
 @; ---------------------------------------------------------------------------------------------------
 
@@ -81,6 +81,3 @@
 @; ---------------------------------------------------------------------------------------------------
 
 @close[formula-database]
-
-
-
