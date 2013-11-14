@@ -136,6 +136,63 @@ I_k = {1\over 2\pi}\int_{S^k} p_jdq^j
 
 }
 
+@slide["Perturbation theory" #:tag "PerturbationTheory" #:showtitle #t]{
+Consider perturbation of the integrable Hamiltonian:
+@equation{
+   H = H_0(I) + \sum V_{\vec{m}}(I) e^{i(\vec{m}\cdot\vec{\phi})}
+}
+Ask ourselves the question:
+@centered{
+@spn[redbox]{
+@larger{Can we make this Hamiltonian integrable by a change of variables?}
+}}
+Perhaps by a change of variables @f-2{(I,\phi)\rightarrow (\tilde{I},\tilde{\phi})} we can bring it to the form:
+@equation{
+   \tilde{H}(\tilde{I}\;)
+}
+But we have to remember that the change of variables should preserve also the
+symplectic form:
+@equation{
+   dI\wedge d\phi = d\tilde{I}\wedge d\tilde{\phi}
+}
+In other words, it should be a @bold{canonical transformation}.
+
+Notice that an @bold{infinitesimal} canonical transformation is the same as the
+Hamiltonian vector field. What about small (but not infinitesimal) canonical
+transformation. A @bold{perturbative} canonical transformation has a series
+expansion:
+@align[r.l @list[
+@f{\tilde{I} =\;}@f{I + \varepsilon \Delta_1 I + \varepsilon^2 \Delta_2 I + \ldots}
+]@list[
+@f{\tilde{\phi} =\;}@f{\phi + \varepsilon \Delta_1 \phi + 
+\varepsilon^2 \Delta_2 \phi + \ldots}
+]]
+In particular, for it to be canonical at the first order @f{\varepsilon}, it has to be:
+@align[r.l @list[
+@f{\Delta_1I =\;}@f{\{\Psi,I\}}
+]@list[
+@f{\Delta_1\phi =\;}@f{\{\Psi,\phi\}}
+]]
+for some @f{\Psi}. Generally speaking:
+@align[r.l @list[
+@f{\tilde{I} = \;}@f{\mbox{ exp }\left( \varepsilon \xi_{\Psi} \right)\;I}
+]@list[
+@f{\tilde{\phi} = \;}@f{\mbox{ exp }\left( \varepsilon \xi_{\Psi} \right)\;\phi}
+]]
+Generally speaking @f{\Psi} has also some expansion in powers of @f{\varepsilon}. 
+
+We have to find @f{\Psi(\varepsilon)} such that:
+@equation{
+   \mbox{exp }(\varepsilon \xi_{\Psi(\varepsilon)}) \; H \mbox{ does not contain } \phi
+}
+To the first order in @f{\varepsilon} we get:
+@equation{
+   (\vec{n}\cdot\vec{\omega})\Psi_{\vec{n}} + V_{\vec{n}} = 0
+}
+where @f{\omega = {\partial H\over\partial I}}. If @f{\vec{\omega}} is irrational then there is no problem. But if @f{\vec{\omega}} is 
+rational, then the @bold{resonance} happens.
+}
+
 @; ---------------------------------------------------------------------------------------------------
 
 @close[formula-database]
