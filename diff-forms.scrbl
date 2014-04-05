@@ -75,9 +75,9 @@
 @(require racket/dict)
 @(init-counter exercise)
 @(define (ex-num label)
-   (elemtag label (number->string (exercise-next label))))
+   (elemtag label (exercise-next label)))
 @(define (ex-ref label)
-   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
+   (elemref label (list "Exercise " (exercise-number label))))
 
 
 @title{Differential forms, integration, exterior derivatives}

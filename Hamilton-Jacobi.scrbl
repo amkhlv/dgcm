@@ -36,21 +36,21 @@
 @; We define some counters:
 @(init-counter exercise)
 @(define (ex-num label)
-   (elemtag label (number->string (exercise-next label))))
+   (elemtag label (exercise-next label)))
 @(define (ex-ref label)
-   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
+   (elemref label (list "Exercise " (exercise-number label))))
 
 @(init-counter theorem)
 @(define (th-num label)
-   (elemtag label (number->string (theorem-next label))))
+   (elemtag label (theorem-next label)))
 @(define (th-ref label)
-   (elemref label (string-append "Theorem " (number->string (theorem-number label)))))
+   (elemref label (list "Theorem " (theorem-number label))))
 
 @(init-counter defn)
 @(define (defn-num label)
-   (elemtag label (number->string (defn-next label))))
+   (elemtag label (defn-next label)))
 @(define (defn-ref label)
-   (elemref label (string-append "Definition " (number->string (defn-number label)))))
+   (elemref label (list "Definition " (defn-number label))))
 
 @; ---------------------------------------------------------------------------------------------------
 @; The basic syntax is somewhat tunable:

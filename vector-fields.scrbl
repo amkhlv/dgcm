@@ -76,15 +76,15 @@
 
 @(init-counter exercise)
 @(define (ex-num label)
-   (elemtag label (number->string (exercise-next label))))
+   (elemtag label (exercise-next label)))
 @(define (ex-ref label)
-   (elemref label (string-append "Exercise " (number->string (exercise-number label)))))
+   (elemref label (list "Exercise " (exercise-number label))))
 
 @(init-counter theorem)
 @(define (th-num label)
-   (elemtag label (number->string (theorem-next label))))
+   (elemtag label (theorem-next label)))
 @(define (th-ref label)
-   (elemref label (string-append "Theorem " (number->string (theorem-number label)))))
+   (elemref label (list "Theorem " (theorem-number label))))
 
 @title{Vector fields}
 @bystro-toc[]
