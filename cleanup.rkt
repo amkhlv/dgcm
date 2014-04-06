@@ -1,4 +1,4 @@
-#!/usr/local/bin/racket
+#!/usr/bin/racket
 
 #lang at-exp racket
 

@@ -1,6 +1,6 @@
 #lang scribble/base
 @(require scribble/core scribble/html-properties scriblib/render-cond)
-@(require amkhlv/bystroTeX/common)
+@;@(require amkhlv/bystroTeX/common)
 
 
 
