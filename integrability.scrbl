@@ -5,7 +5,7 @@
 @(require (only-in (planet jaymccarthy/sqlite) close))
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
-@(define bystro-conf 
+@(define bystro-conf   
    (bystro (find-executable-path "amkhlv-java-formula.sh")
            "integrability_formulas.sqlite"  ; name for the database
            "integrability" ; directory where to store .png files of formulas
@@ -19,21 +19,18 @@
 @(define singlepage-mode #f)
 @; ---------------------------------------------------------------------------------------------------
 @(begin ;do not change anything here:
-   (define (start-formula-database)
-     (configure-bystroTeX-using bystro-conf)
-     (bystro-initialize-formula-collection bystro-conf))
-   (define formula-database (start-formula-database))
-   (unless (bystro-formula-processor bystro-conf)
-     (error "*** could not find executable for formula processing ***"))
    (define-syntax (syntax-setter x) (defines-syntax-for-formulas x))                
    (syntax-setter defineshiftedformula)
-   (defineshiftedformula "formula-enormula-humongula!")
-   (bystro-titlepage-init #:singlepage-mode singlepage-mode))
+   (defineshiftedformula "formula-enormula-humongula!"))
 @; ---------------------------------------------------------------------------------------------------
 
-@title{Liouville integrability}
-@bystro-toc[]
-@linebreak[]
+
+@(bystro-inject-style "misc.css" "no-margin.css")
+
+@title[#:style '(no-toc no-sidebar)]{Liouville integrability}
+
+@table-of-contents[]
+
 @linebreak[]
 @hyperlink["../index.html"]{go back to main page}
 
@@ -196,3 +193,5 @@ rational, then the @bold{resonance} happens.
 @; ---------------------------------------------------------------------------------------------------
 
 @close[formula-database]
+
+ 

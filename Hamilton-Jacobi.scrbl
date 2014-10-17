@@ -1,84 +1,36 @@
 #lang scribble/base
 @(require racket scribble/core scribble/base scribble/html-properties)
-@(require (for-syntax (planet amkhlv/bystroTeX/slides_for-syntax)))
-@(require (planet amkhlv/bystroTeX/common) (planet amkhlv/bystroTeX/slides))
+@(require (for-syntax "defs_for-syntax.rkt" (planet amkhlv/bystroTeX/slides_for-syntax)))
+@(require "defs.rkt" (planet amkhlv/bystroTeX/common) (planet amkhlv/bystroTeX/slides))
 @(require (only-in (planet jaymccarthy/sqlite) close))
-
-
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
-@(define bystro-conf 
+@(define bystro-conf   
    (bystro (find-executable-path "amkhlv-java-formula.sh")
            "Hamilton-Jacobi_formulas.sqlite"  ; name for the database
-           "Hamilton-Jacobi_formulas" ; directory where to store .png files of formulas
+           "Hamilton-Jacobi" ; directory where to store .png files of formulas
            25  ; formula size
            (list 255 255 255) ; formula background color
            (list 0 0 0) ; formula foreground color
            2   ; automatic alignment adjustment
            0   ; manual alignment adjustment
            ))
-@(begin ;do not change here:
-   (define (start-formula-database)
-     (configure-bystroTeX-using bystro-conf)
-     (bystro-initialize-formula-collection bystro-conf))
-   (define formula-database (start-formula-database)))
-@; ---------------------------------------------------------------------------------------------------
 @; This controls the single page mode:
 @(define singlepage-mode #f)
 @; ---------------------------------------------------------------------------------------------------
-@; it is possible to define new functions:
-@(begin
-   (define (label s) (elemtag s (number-for-formula s)))  
-   (define (ref s) (elemref s (ref-formula s)))
-   )
-@(require racket/dict)
-
-@; We define some counters:
-@(init-counter exercise)
-@(define (ex-num label)
-   (elemtag label (exercise-next label)))
-@(define (ex-ref label)
-   (elemref label (list "Exercise " (exercise-number label))))
-
-@(init-counter theorem)
-@(define (th-num label)
-   (elemtag label (theorem-next label)))
-@(define (th-ref label)
-   (elemref label (list "Theorem " (theorem-number label))))
-
-@(init-counter defn)
-@(define (defn-num label)
-   (elemtag label (defn-next label)))
-@(define (defn-ref label)
-   (elemref label (list "Definition " (defn-number label))))
-
-@; ---------------------------------------------------------------------------------------------------
-@; The basic syntax is somewhat tunable:
-@(define-syntax (defineshiftedformula x) 
-   (bystro-formula-syntax 
-    #:autoalign-formula-prefix "f"
-    #:manual-formula-prefix    "f"
-    #:display-math-prefix      "equation"
-    #:size-change-notation     "fsize"
-    #:size-increase-notation   "fsize+"
-    #:size-restore-notation    "fsize="
-    x))
+@(begin ;do not change anything here:
+   (define-syntax (syntax-setter x) (defines-syntax-for-formulas x))                
+   (syntax-setter defineshiftedformula)
+   (defineshiftedformula "formula-enormula-humongula!"))
 @; ---------------------------------------------------------------------------------------------------
 
-@; ---------------------------------------------------------------------------------------------------
-@; INITIALIZATION (please do not change anything in this part!):
-@(unless (bystro-formula-processor bystro-conf)
-   (error "*** could not find executable for formula processing ***"))
-@(defineshiftedformula "formula-enormula-humongula!")
-@(bystro-titlepage-init #:singlepage-mode singlepage-mode)
-@; ---------------------------------------------------------------------------------------------------
 
-@; ---------------------------------------------------------------------------------------------------
-@; AND HOPEFULLY SOME CONTENT:
+@(bystro-inject-style "misc.css" "no-margin.css")
 
-@title{Hamilton-Jacobi theory}
-@bystro-toc[]
-@linebreak[]
+
+@title[#:style '(no-toc no-sidebar)]{Hamilton-Jacobi theory}
+@table-of-contents[]
+
 @linebreak[]
 @hyperlink["../index.html"]{go back to main page}
 
@@ -386,6 +338,9 @@ In this case the PDE (@ref{NonlinearPDE}) is:
 
 
 
+@bystro-ribbon[]
+
 @; ---------------------------------------------------------------------------------------------------
 
 @close[formula-database]
+

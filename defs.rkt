@@ -38,7 +38,7 @@
 (require racket/dict)
 (init-counter exercise)
 (init-counter theorem)
-(provide ex-num ex-ref th-num th-ref gbl gbr)
+(provide ex-num ex-ref th-num th-ref defn-num defn-ref gbl gbr)
 (define (ex-num label)
   (elemtag label (exercise-next label)))
 (define (ex-ref label)
@@ -47,6 +47,10 @@
   (elemtag label (theorem-next label)))
 (define (th-ref label)
   (elemref label (list "Theorem "  (theorem-number label))))
+(define (defn-num label)
+  (elemtag label (exercise-next label)))
+(define (defn-ref label)
+  (elemref label (list "Exercise "  (exercise-number label))))
 (define (gbl) (string-append 
                 "[" 
                 "\\! "
