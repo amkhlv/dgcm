@@ -10,3 +10,5 @@ This is only partial, and work in progress.
 
 To compile, use [BystroTeX](http://andreimikhailov.com/slides/bystroTeX/slides-manual/index.html).
 
+Some files are symlinks:  `build.rkt`, `cleanup.rkt`, and the `css` files.
+They can be found [here](https://github.com/amkhlv/usr/tree/master/share/scribble)

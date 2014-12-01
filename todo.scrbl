@@ -9,10 +9,10 @@
    (bystro (find-executable-path "amkhlv-java-formula.sh")
            "todo_formulas.sqlite"  ; name for the database
            "todo" ; directory where to store .png files of formulas
-           25  ; formula size
+           21  ; formula size
            (list 255 255 255) ; formula background color
            (list 0 0 0) ; formula foreground color
-           2   ; automatic alignment adjustment
+           1   ; automatic alignment adjustment
            0   ; manual alignment adjustment
            ))
 @; This controls the single page mode:

@@ -1,4 +1,4 @@
-#!/usr/bin/racket
+#!/usr/bin/env racket
 
 #lang at-exp racket
 
@@ -11,7 +11,7 @@
       (copy-file
        (string-append (hash-ref f "dest") "/" (hash-ref f "name") ".html")
        (expand-user-path (string-append 
-                          "~/a/other/server/www-data/scribbles/teaching/gdmc/" 
+                          "~/a/other/server/saudade/www-data/scribbles/teaching/gdmc/" 
                           (hash-ref f "dest") 
                           "/"
                           (hash-ref f "name") 
@@ -20,7 +20,7 @@
       (copy-file 
        (string-append (hash-ref f "name") ".html")
        (expand-user-path (string-append 
-                          "~/a/other/server/www-data/scribbles/teaching/gdmc/" 
+                          "~/a/other/server/saudade/www-data/scribbles/teaching/gdmc/" 
                           (hash-ref f "name") 
                           ".html"))
        #t)))
@@ -29,7 +29,7 @@
    (string-append 
     "rsync -cav --delete " 
     f
-    "/ ~/a/other/server/www-data/scribbles/teaching/gdmc/"
+    "/ ~/a/other/server/saudade/www-data/scribbles/teaching/gdmc/"
     f
     "/")))
 (for/list ((f
@@ -42,7 +42,7 @@
    f 
    (expand-user-path 
     (string-append 
-     "~/a/other/server/www-data/scribbles/teaching/gdmc/" 
+     "~/a/other/server/saudade/www-data/scribbles/teaching/gdmc/" 
      (path->string (file-name-from-path f))))
    #t))
 
