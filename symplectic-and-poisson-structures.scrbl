@@ -104,14 +104,20 @@ d\{H_1,H_2\} =\; \iota_{[\xi_{H_1},\xi_{H_2}]}\;\omega
 }
 which is equivalent to (@ref{FluxOfPB}).
 
-Now the Jacobi identity for the vector fields:
+Remember the Jacobi identity for vector fields:
 @equation{
 [\xi_{H_1},[\xi_{H_2},\xi_{H_3}]] = [[\xi_{H_1},\xi_{H_2}],\xi_{H_3}] + [\xi_{H_2},[\xi_{H_1},\xi_{H_3}]]
 }
-implies the following @bold{corollary}:
+There is a similar Jacobi identity for the Poisson bracket of functions:
 @equation[#:label "JacobiIdentity"]{
 \{H_1,\{H_2,H_3\}\} = \{\{H_1,H_2\},H_3\} + \{H_2,\{H_1,H_3\}\}
 }
+This follows from:
+@align[r.l
+ @list[@f{\{\{H_1,H_2\},H_3\} + \{H_2,\{H_1,H_3\}\} } @f{=}
+]@list[@f{= - \omega([\xi_1,\xi_2],\xi_3) - \omega(\xi_2,[\xi_1,\xi_3])\;}@f{= - {\cal L}_{\xi_1}(\omega(\xi_2,\xi_3)) = }
+]@list["" @f{= \{H_1,\{H_2,H_3\}\}}
+]]
 
 }
 
