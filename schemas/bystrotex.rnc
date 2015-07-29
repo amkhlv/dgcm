@@ -1,0 +1,12 @@
+element config {
+   element scribblings {
+      element scribbling {
+         element name { text },
+         element formulas-dir { text }?,
+         element sqlite-file  { text }?,
+         (element multipage { empty } 
+          | (element dest { text }?))
+      }*
+   }*
+}
+

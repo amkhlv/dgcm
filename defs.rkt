@@ -2,7 +2,7 @@
 ; ---------------------------------------------------------------------------------------------------
 ; it is possible to define new functions:
 (require racket scribble/core scribble/base scribble/html-properties)
-(require (planet amkhlv/bystroTeX/common) (planet amkhlv/bystroTeX/slides))
+(require bystroTeX/common bystroTeX/slides)
 
 (provide label)
 (define (label s) (elemtag s (number-for-formula s)))  
