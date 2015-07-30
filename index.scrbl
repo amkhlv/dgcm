@@ -30,8 +30,5 @@ I will put here @bold{some} notes. This is @bold{under construction}.
 @linebreak[]
 @linebreak[]
 
-@hyperlink["todo/todo.html"]{TODO list}
-
-@linebreak[]
 
 @hyperlink["https://github.com/amkhlv/dgcm"]{Source code}

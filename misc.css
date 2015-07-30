@@ -1,1 +1,146 @@
-/home/andrei/usr/share/scribble/myscribbles/misc.css
+.sourcelink {
+  font-size:x-small;
+  background-color:#FFFDD0;
+}
+
+.scrbllink {
+  font-size:x-small;
+}
+
+/* This one below is for homepage link table: */
+.mytitlecell {
+vertical-align: top; 
+text-align: right; 
+border-right: 1px solid black; 
+}
+
+.linktablecell {
+text-align:left;
+font-size:x-small;
+}
+
+/* For standard table: */
+.amktablecell {
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopleftcell {
+    border: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopcell {
+    border-top: 1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktableleftcell {
+    border-left:  1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktablecell-hor {
+    border-top:   1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopleftcell-hor {
+    border: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopcell-hor {
+    border-top: 1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktableleftcell-hor {
+    border-top:   1px solid green;
+    border-left:  1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktablecell-vert {
+    border-left: 2px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopleftcell-vert {
+    border: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktabletopcell-vert {
+    border-left: 2px solid green;
+    border-top: 1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.amktableleftcell-vert {
+    border-left:  1px solid green;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    padding: 2px 5px 2px 5px
+}
+
+.greenlink {
+    background-color: green;
+}
+
+.amkyell {
+    background-color: yellow;
+}
+
+.amkhighlight {
+    background-color: rgb(255,255,200);
+}
+
+.red {
+    color: red;
+}
+
+.attn {
+    color: red;
+    font-weight: bold;
+}
+
+.comment {
+    font-size:80%;
+    border-left:2px solid blue;
+    padding-left:10px;
+}
+
+.redbox {
+    border:2px solid red;
+    padding:10px 10px 10px 10px;
+}
+
+.greenbox {
+    border:2px solid green;
+    padding:10px 10px 10px 10px;
+}
+
+.bluebox {
+    border:2px solid blue;
+    padding:10px 10px 10px 10px;
+}
+
+.stt {
+    background-color: PapayaWhip;
+    }

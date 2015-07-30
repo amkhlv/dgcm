@@ -1,30 +1,25 @@
 #lang scribble/base
 @(require racket scribble/core scribble/base scribble/html-properties)
-@(require "defs_for-syntax.rkt" (for-syntax bystroTeX/slides_for-syntax))
-@(require "defs.rkt" bystroTeX/common bystroTeX/slides)
+@(require "defs.rkt" bystroTeX/common bystroTeX/slides (for-syntax bystroTeX/slides_for-syntax))
 @(require (only-in db/base disconnect))
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
 @(define bystro-conf   
    (bystro (bystro-connect-to-server #f "127.0.0.1" 29049 "svg")
-           "manifold_formulas.sqlite"  ; name for the database
+           "manifold/formulas.sqlite"  ; name for the database
            "manifold" ; directory where to store .png files of formulas
-           21  ; formula size
+           24  ; formula size
            (list 255 255 255) ; formula background color
            (list 0 0 0) ; formula foreground color
-           1   ; automatic alignment adjustment
+           2   ; automatic alignment adjustment
            0   ; manual alignment adjustment
            ))
+@(set-bystro-extension! bystro-conf "svg")
 @; This controls the single page mode:
 @(define singlepage-mode #f)
 @; ---------------------------------------------------------------------------------------------------
-
-
 @(bystro-def-formula "formula-enormula-humongula!")
-
 @; ---------------------------------------------------------------------------------------------------
-
-
 @(bystro-inject-style "misc.css" "no-margin.css")
 
 @title[#:style '(no-toc no-sidebar)]{Manifolds}
@@ -185,8 +180,12 @@ We have to define a @bold{chart} and an @bold{atlas of charts}.
 Pick a copy of @f{{\bf R}^n} and an open subset @f{U\subset {\bf R}^n}. 
 @tabular[@list[
  @list[
-@para{A @spn[attn]{chart}
-is a continuous map @f{\phi: U\to M}:}
+@nested{A @spn[attn]{chart}
+is a continuous map @f{\phi: U\to M} such that:
+@itemlist[#:style 'ordered
+@item{The image @f{\phi(U)} is an open set in @f{M}}
+@item{@f{\phi} is a homeomorphism between @f{U} and @f{\phi(U)}}
+]}
 @hspace[3]
 @(image #:scale 0.75 (string->path "snapshots/def-chart.png"))
 ]
@@ -210,9 +209,11 @@ the ``pre-images'' @f{V_1 = \phi_1^{-1}(\phi_1(U_1)\cap \phi_2(U_2))} and
 
 There is a natural map @f{\tau_{12}: V_1\to V_2} defined as follows:
 @equation[#:label "DefTau"]{\tau_{12} = \phi_2^{-1}\circ \phi_1}
+@comment{
 Here @f{f\circ g} denotes the @bold{composition of maps}:
-@equation{ (f\circ g)(x) = f(g(x)) }
-We will say that they are @bold{compatible if this map is a diffeomorphism.}
+@equation{ (f\circ g)(x) = f(g(x)) }}
+
+We will say that  @spn[attn]{two charts are compatible} if this map is bijective and smooth.
 
 @section{Definition of atlas}
 An atlas of @f{M} is a collection of charts @f{\phi_i\;:U_i\to M} such that: 
@@ -221,292 +222,250 @@ An atlas of @f{M} is a collection of charts @f{\phi_i\;:U_i\to M} such that:
 @item{The union of all @f{\phi_i(U_i)} covers the whole @f{M}}
 ]
 
-@section{Definition of two atlases being equivalent}
-Two atlases are considered equivalent, if their union is again an atlas.
+@section[#:tag "Potato"]{Example: surface of a potato is a 2d manifold}
+Here is an example of an atlas (five charts are shown):
 
-@section{Definition of a smooth manifold}
-A smooth manifold is  a set @f{M} together with the following additional structure:
-@itemlist[
-@item{@bold{An equivalence class of atlases}}
-]
-
+@image[#:scale 0.5]{svg/surface-of-potato.svg}
 }
 
-@slide["Tangent space: how to define it?" #:tag "TangentSpaceEquivalence" #:showtitle #t]{
-We have to introduce the notion of a @bold{tangent vector}. Arnold uses a very physical definition:
-@itemlist[
-@item{tangent vector is the velocity vector of a particle}
-]
-But we have not yet defined what is ``vector''. So, the definition is circular. How do we break out of
-this circle? 
+@slide["Equivalence relation on atlases" #:tag "EquivalenceOfAtlases" #:showtitle #t]{
+As you can see from @seclink["Potato"]{the potato picture}, an atlas is a rather elaborate
+(cumbersome?) construction.
+
+But actually, we only need a very limited piece of information from it. The atlas in all its detail
+is way too much. So, we will introduce some sort of equivalence relation on atlases: two atlases
+are considered @bold{equivalent}, when they provide the @bold{same essential data}. 
+
+So, what is this essential data?
+
+The atlas should be able to tell us which functions @f{M\to {\bf R}} are smooth and which are
+not. That's all! 
 
 @div[redbox]{
-We will proceed in a round-about manner. Instead of saying directly what the vector of velocity is,
-we just @bold{explain how to figure out if two trajectories have the same velocity}. 
-}
+The function @f{f\;:\;M\to {\bf R}} is called smooth if for any chart @f{\phi\;:\; U\to M} the
+composition @f{f\circ \phi\;:\; (U\subset {\bf R}^n)\to {\bf R}} is smooth (as a function of @f{n} variables)
+} 
 
-This is a mathematical method of defining a property through the concept of 
-@bold{equivalence classes}.
+We will @spn[attn]{restrict ourselves} to only use atlas for one single purpose: 
 
-@fsize+[@-[5]]
-@div[comment]{
-Let @f{X} be a set. A @bold{relation} between elements of @f{X} is a subset @f{\Delta \subset X\times X}.
-A relation is called an @bold{equivalence} if it is:
-@tg[ol]{
-@tg[li]{Refelxive: @f{(x,x)\in \Delta}}
-@tg[li]{Symmetric: @f{((x,y)\in \Delta) \Leftrightarrow ((y,x)\in \Delta)}}
-@tg[li]{Transitive: @f{((x,y)\in \Delta \mbox{ and } (y,z)\in\Delta) \Rightarrow ((x,z)\in \Delta)}}
-}
-}
-@fsize=[]
-
-@div[redbox]{
-To describe the value of a property is the same as to describe the equivalence class of elements
-having the same value
-}
-}
-
-@slide["Tangent space: trajectories" #:tag "TangentSpaceTrajectories" #:showtitle #t]{
-@tabular[@list[
- @list[
-@para{
-A trajectory originating at the point @f{x\in M} is a @bold{smooth map} from 
-the interval @f{f\;:\;[0,\infty) \to M} such that @f{f(0) = x}
-@linebreak[]
-@smaller{
-(``smooth map'' means that for any chart @f{\phi:U\to M} which covers @f{x\in M},
-the map @f{\phi^{-1}\circ f} should be smooth)
-}
-}
-@hspace[3]
-@(image (string->path "snapshots/trajectories-in-manifold-with-U.png"))
-]
-]]
-Let us consider the composition:
-@equation|{
-\phi^{-1}\circ f \;:\; I \to {\bf R}^n
-}|
-This takes values in @f{{\bf R}^n}, @italic{i.e.} the value is a vector. We will introduce
-the following notaions for this vector:
-@equation[#:label "VectorComponentNotation"]|{
-(\phi^{-1}\circ f)(t) = 
-\left(
-\begin{array}{c} f^1(t) \cr f^2(t) \cr \ldots \cr f^n(t) \end{array}
-\right)
-}|
-Here @f{f^1(t),\ldots f^n(t)} are called the @bold{components} of the map @f{f}.
-}
-
-@slide["Tangent space: velocity of a trajectory" #:tag "TangentSpaceVelocity" #:showtitle #t]{
-Now we are ready to answer the question: 
 @itemlist[
-@item{When two trajectories starting at the point @f{x} have the same velocity at @f{x}?}
+@item{to be able to say if a given function is smooth or not}
 ]
-The answer is:
-@div[redbox]{
-We @spn[attn]{declare} that two trajectories @f{f(t)} and @f{g(t)}, both starting at @f{x} 
-have the same velocity iff:
-@linebreak[]
-@linebreak[]
-@hspace[5]@f+0+5{
-f^k(t) - g^k(t) = o(t) \;\;\mbox{\small when }\; t\to 0\;\;,\;\; k\in\{1,\ldots,n\}
-}@hspace[5]@label{oSmallOft}
-}
-Notice that the component notation (@ref{VectorComponentNotation}) uses a chart @f{\phi}. 
 
-@bold{Exercise @ex-num{VelocityDoesNotDependOnChart}} Suppose that the point @f{x} is covered by more
-than one chart. Prove that the equivalence relation which we have just described does not depend on a 
-which chart we use.
+@centered{@spn[redbox]{@spn[attn]{warning}: All other uses of atlas will be considered @italic{a priori} illegal!}}
 
-Now you know what is tangent vector. If somebody asks you: ``give me an example of a tangent 
-vector to a manifold @f{M} at a point @f{x\in M}'', you should do the following:
-@tabular[@list[
- @list[
-@(image #:scale 0.75 (string->path "snapshots/trajectories-in-manifold-starting.png"))
-@hspace[2]
-@itemlist[#:style 'ordered
-@item{Draw some trajectory @f{f(t)} starting at @f{x} }
-@item{Say that this trajectory @bold{defines} a tangent vector to @f{M} at the point @f{x}}
-@item{But dont forget to say, that any other trajectory @f{g(t)} which is close to @f{f(t)} in the 
-sense of (@ref{oSmallOft}) would define the same tangent vector}
-]
-]
-]]
+It is easy to see that two atlases are @bold{equivalent} if and only if their sum is also a valid atlas.
 }
 
-@slide["Tangent space: coordinates" #:tag "TangentSpaceInCoordinates" #:showtitle #t]{
-First of all, a bit of notations. As we explained, any smooth trajectory @f{f(t)} defines a
-velocity vector, as an equivalence class of this @f{f(t)} modulo the equivalence relations (@ref{oSmallOft}). 
-The equivalence class is usually denoted @f{[f]}. But we find this notation ugly in our case.
-Instead, we will write:
-@equation[#:label "VectorDotNotation"]{
-\dot{f}(0)\;\;\mbox{ \small or even }\;\; {df\over dt}(0)
-}
---- this is the same as @f{[f]}, @italic{i.e.} the velocity vector corresponding to the trajectory.
-
-Let us study the component notations (@ref{VectorComponentNotation}) in some detail. The components
-of the vector on the RHS of (@ref{VectorComponentNotation}) is simply the coordinates of the 
-point @f{\phi^{-1}(f(t))}. A more interesting object is @spn[attn]{coordinates of the vector}:
-@equation[#:label "CoordinatesOfVector"]{
-\dot{f}(0) = \left(
-\begin{array}{c}
-\left.{df^1(t)\over dt}\right|_{t=0} \cr \ldots \cr \left.{df^n(t)\over dt}\right|_{t=0}
-\end{array}
-\right)
-}
-To fix a tangent vector, we have to fix @f{n} components 
-@equation[#:label "VComponents"]{
-v^1 = \left.{df^1(t)\over dt}\right|_{t=0},\;\;\ldots\;\;,\; v^n = \left.{df^n(t)\over dt}\right|_{t=0}
-}
---- these numbers @f{v_1,\ldots,v_n} are called ``components of the vector''.
-}
-
-@slide["Tangent space is a linear space" #:tag "TangentSpaceLinearStructure" #:showtitle #t]{
-The set of all tangent vectors to @f{M} at the point @f{x} has a natural structure of a linear space,
-@italic{i.e.} we can define the operation of summation:
-@equation[#:label "LinearStructure"]{
-[f_1] + [f_2] \stackrel{\rm\small def}{=} [\phi( \phi^{-1}\circ f_1 + \phi^{-1}\circ f_2 )] 
-}
-The right hand side is the definition of the opearation ``@f{+}''. When we do ``@f{+}'' on the right
-hand side we just sum the coordinates of @f{\phi^{-1}\circ f_1} and @f{\phi^{-1}\circ f_2} 
-@italic{i.e.} we compute the sum of components @f-2{f_1^k + f_2^k} as defined in 
-(@ref{VectorComponentNotation}).
-
-@bold{Potential problem:} 
-On the left hand side, we are trying to define something depending on @bold{equivalence class}
-of @f{f_1} and @bold{equivalence class} of @f{f_2}. However, the right hand side @italic{a priori}
-depends on @f{f_1} and @f{f_2} themselves (and not just on their corresponding equivalence classes!)
-That's why we need:
-
-@bold{Exercise @ex-num{LinearStructureCorrectlyDefined}:} 
-Show that the expression on the right hand side, actually, does not change if we replace @f{f_1}
-and @f{f_2} with @f{g_1} and @f{g_2} where @f{g_1} is equivalent to @f{f_1} and @f{g_2} to @f{f_2}
-in the sense of (@ref{oSmallOft}).
-
-Also, show that this definition of ``@f{+}'' does not change if we pass from a chart
-@f{\phi} to another chart @f{\tilde{\phi}}.
-
-@bold{In terms of components} @f{v^1,\ldots,v^n} defined as in (@ref{VComponents}) the 
-operation ``@f{+}'' is obvious:
+@slide["Smooth maps between manifolds" #:tag "SmoothMaps" #:showtitle #t]{
+A map 
 @equation{
-\left(\begin{array}{c} 
-v_1^1 + v_2^1 \cr
-v_1^2 + v_2^2 \cr
-v_1^3 + v_2^3 \cr
-\ldots \cr
-v_1^n + v_2^n
-\end{array}\right)
+F:\;M\to N
+}
+is called @bold{smooth} if for any smooth function @f{f:\;N\to {\bf R}} the composition
+@f{f\circ F\;:\;M\to {\bf R}} is a smooth function.
+
+Particularly important are smooth maps @f{{\bf R}\to M}; such a map is called ``a smooth path''.
+(More precisely, a @bold{parametrized smooth path}). We will also use the term ``trajectory''.
 }
 
-There is a very similar definition of the multiplication by a number @f{\lambda\in {\bf R}}:
+@slide["The notion of o-little" #:tag "OLittle" #:showtitle #t]{
+@table-of-contents[]
+@section{For real-valued functions}
+@tabular[@list[@list[
+@nested{Consider a point @f{m_0\in M} and a function @f{f\;:\;M\to {\bf R}}.
+Let us ask ourselves a question: is it true that for a point @f{m} approaching @f{m_0}:
+@equation[#:label "olittle"]{f(m) = f(m_0) + o(m-m_0)\;\;?}
+@italic{A priori} this question does not make much sense, because we don't know how to
+make sense of @f{m-m_0}. A manifold is not a linear space (neither affine space) so we cannot
+take a difference of two points.
+
+Instead, we will give the following definition. We will say that Eq. (@ref{olittle}) holds true if
+and only if ∀ path @f{\sigma\;:\; {\bf R}\to M} such that @f{\sigma(0)=m_0} we have:
 @equation{
-\lambda\cdot[f] \stackrel{\rm\small def}{=} [\phi( \lambda\phi^{-1}\circ f)]
+f(\sigma(t)) - f(m_0) = o(t)
 }
-which becomes @f{(\lambda v^1,\ldots,\lambda v^n)} in components.
+
+Similarly, for any @f{n>0} we define:
+@equation{
+f(m) = f(m_0) + o((m-m_0)^n) ⇔ (∀ \sigma: {\bf R}\to M:\; \sigma(0)=m_0 ⇒ f(\sigma(t))=f(m_0)+o(t^n))
 }
+}
+@image{svg/point-in-potato.svg}]]]
+
+@section[#:tag "sec:OLittleForMaps"]{For maps of smooth manifolds}
+Let @f{F:\; M\to N} and @f{G:\; M\to N} be two maps from @f{M} to @f{N}, which map the point
+@f{m_0\in M} to the same point @f{n_0\in N}:
+@equation{
+F(m_0) = G(m_0) = n_0 \in N
+}
+We will say that:
+@equation{
+F(m) = G(m) \;\;\mbox{mod}\;\; o(m-m_0)
+}
+if for any smooth function @f{h:\;N\to {\bf R}}:
+@equation{
+h(F(m)) = h(G(m))\;\;\mbox{mod}\;\; o(m-m_0) \;\;
+}
+
+}
+
+
+@slide["Cotangent space" #:tag "CotangentSpace" #:showtitle #t]{
+
+Given a point @f{m_0\in M}, we will define a linear space @f{T^*_{m_0}M}. Consider the linear
+space @f{L} of all smooth functions @f{\phi:\;M\to {\bf R}} such that @f{\phi(m_0)=0}.
+
+Consider the subspace @f{L_o\subset L} consisting of such functions which also satisfy @f{\phi(m) = o(m-m_0)}.
+
+@bold{Definition:} the cotangent space to @f{M} at the point @f{m_0\subset M} is:
+@equation{
+T^*_{m_0}M = L/L_o
+}
+--- all functions vanishing at the point @f{m_0} modulo those which ``vanish faster than linear''.
+
+This is, by definition, a linear space.
+}
+
+
+@slide["Tangent space" #:tag "TangentSpace" #:showtitle #t]{
+We will define the tangent space to @f{M} at the point @f{m_0\in M} as the dual to the cotangent space:
+@equation{
+T_{m_0}M = (T^*_{m_0}M)^*
+}
+Remember that the @seclink["CotangentSpace"]{definition of the cotangent space} used the notion
+of @f{o(m-m_0)}, which in turn @seclink["OLittle"]{uses the trajectories passing through @f{m_0}}.
+Not surprizingly, the tangent space can be defined in terms of trajectories. Let us introduce
+an equivalence relation on the space of trajectories passing through the point @f{m_0\in M}.
+For two trajectories @f{\sigma_1 :\; {\bf R}\to M} and @f{\sigma_2:\; {\bf R}\to M} such that
+@f{\sigma_1(0)=m_0} and @f{\sigma_2(0)=m_2} we say that
+@f{\sigma_1\equiv \sigma_2} iff:
+@equation{
+\sigma_1(t) = \sigma_2(t)\;\;\mbox{mod}\;\; o(t)
+}
+where @f{o(t)} is @seclink["sec:OLittleForMaps"]{in the sense of maps from @f{\bf R} to @f{M}}.
+
+When @f{\sigma_1\equiv\sigma_2}, we will say that ``@f{\sigma_1} and @f{\sigma_2} have @bold{the same velocity}
+at the point @f{m_0}''.
+
+In this sense:
+
+@centered{@spn[redbox]{Tangent space is the space of velocities of trajectories}}
+
+Notice that we gave two equivalent definitions: as the space dual to @f{T^*_{m_0}M} and as the space of equivalence
+classes of trajectories. The second definition is somewhat more geometrical, but the first one 
+exposes the @bold{linear structure}:
+
+@centered{@spn[redbox]{Both @f{T^*_{m_0}M} and @f{T_{m_0}M} are linear spaces}}
+}
+
 
 @slide["Tangent bundle" #:tag "TangentBundle" #:showtitle #t]{
-For any point @f{x\in M}, we can consider the corresponding tangent space. It is denoted:
-@equation{
-T_xM  \;\; \mbox{\small --- the tangent space to }M\mbox{ \small at the point }x
-}
-Let us consider the union (as in set theory) of all these @f{T_xM} over all @f{x\in M}.
-This turns out to be a @bold{smooth manifold of dimension} @f{2n}, the ``tangent bundle of @f{M}'':
+For any point @f{x\in M}, we can consider the corresponding tangent space @f{T_xM}.
+Let us consider @bold{the union} (in set theory) of all these @f{T_xM} over all @f{x\in M}.
+This is some set, which we will call @f{TM}:
 @equation{
 TM = \bigcup\limits_{x\in M} T_xM  \;\; \mbox{\small --- the tangent bundle of }M
 }
-The point of @f{TM} is a pair @f{(x,v)} where @f{x\in M} and @f{v\in T_xM}.
+@tabular[@list[@list[
+@nested{
+A point of @f{TM} is a pair @f{(m,\sigma)} where @f{m} is a point of @f{M} 
+@linebreak[] 
+and @f{\sigma} a trajectory passing through @f{m} modulo @f{o(t)}.}
+@hspace[5]
+@image{svg/m-and-sigma.svg}]]]
 
-If we have a chart @f{\phi:U\to M}, covering @f{x}, then we can parametrize @f{(x,v)} by @f{2n}
-numbers:
-@equation[#:label "XandV"]{
-(x^1,\ldots x^n\;,\;\; v^1,\ldots,v^n)
-}
-Indeed, the definitions of @f{x^i} and @f{v^i} are:
+It turns out that @f{TM} is a @bold{smooth manifold of dimension} @f{2n}, the ``tangent bundle of @f{M}''.
+@smaller{(the word ``bundle'' will be explained later)}.
+
+In which sense @f{TM} is a manifold?  It comes naturally equipped with @bold{an atlas}!
+
+Let us consider some atlas of the manifold @f{M}. It consists of some collection of maps:
+@equation{\phi_i\;:\;U_i\to M}
+Now we will cook from it some atlas for @f{TM}. 
+
+@tabular[@list[@list[
+@nested{Let us consider the collection of open
+sets:
 @equation{
-\left(\begin{array}{c}
-x^1\cr \ldots \cr x^n
-\end{array}\right) = \phi(x) \;\;\mbox{ and } \;\;
-\left(\begin{array}{c}
-v^1\cr\ldots \cr v^n
-\end{array}\right) = 
-\left(\begin{array}{c}
-\left.{\partial f^1(t)\over \partial t}\right|_{t=0}
-\cr
-\ldots
-\cr
-\left.{\partial f^n(t)\over \partial t}\right|_{t=0}
-\end{array}\right)
+(U_i\times {\bf R}^n) \subset {\bf R}^{2n}\;\;\;\mbox{("cylinder over }U_i\mbox{")}
+}
+and the following maps @f{\Phi_i:\;(U_i\times {\bf R}^n)\to TM}:
+@equation{
+\Phi_i(x^1,\ldots,x^n,v^1,\ldots,v^n)=(m,\sigma)
+}
+where @f{m= \phi(x^1,\ldots,x^n)} (a point in @f{M}) and
+@f{\sigma} is the following trajectory: 
+@equation{
+\sigma(t) = \phi(x^1 + tv^1,\ldots,x^n + tv^n)
+}
+modulo @f{o(t)}
 } 
-This gives a straightforward description of a part of @f{TM}:
-@equation[#:label "TMOverChart"]{
-\bigcup\limits_{x\in \phi(U)}T_xM = U\times {\bf R}^n
-}
-Notice that @f{M} is totally covered by charts @f{U_i}. And, as we have just explained, for every
-chart we have a fairly straightforward description (@ref{TMOverChart}) of @f{TM}. 
-Therefore we obtain a fairly concrete description of @f{TM}, except for one important detail which 
-we have to figure out:
+@image{svg/cylinder-over-U.svg}]]]
 
-@div[redbox]{
-There are points @f{x} which are covered by two (or even more than two!) charts. For such points
-there is more than one description in terms of (@ref{XandV}). We have to explain @bold{when 
-two different 
-descriptions correspond to the same point.} 
-}
-
-In other words, given two charts, @f{\phi:U\to M} and @f{\widetilde{\phi}:\widetilde{U}\to M}: 
-
-what is the relation between 
-@f{(x^1,\ldots,x^n,\;v^1,\ldots v^n)}  and 
-@f{(\tilde{x}^1,\ldots,\tilde{x}^n,\;\tilde{v}^1,\ldots,\tilde{v}^n)}
-
-when @f{(x^1,\ldots,x^n,\;v^1,\ldots v^n)} and 
-@f{(\tilde{x}^1,\ldots,\tilde{x}^n,\;\tilde{v}^1,\ldots,\tilde{v}^n)} are actually the same
-point of @f{TM}, only from the point of view of two different charts?
 
 }
 
 @slide["Tangent bundle: transition functions" #:tag "TangentBundleTransitionFunctions" #:showtitle #t]{
-Investigation of this issue leads to the notion of ``transition functions''. 
+Let us consider the case when some point @f{m} is covered by two charts @f{U,\phi} and @f{\widetilde{U},\widetilde{\phi}}.
 
-The relation between @f{(x^1,\ldots x^n)} and @f{(\tilde{x}^1,\ldots,\tilde{x}^n)} we already know.
-When we have two charts @f{\phi:U\to M} and @f{\widetilde{\phi}:\widetilde{U}\to M}, we get a ``gluing function'' 
-@f{\tau} as in Eq. (@ref{DefTau}):
+@section{Gluing functions intersections of charts of @f{M}}
+We know that the two points @f{(x^1,\ldots,x^n)\in U} and @f{(\widetilde{x}^1,\ldots,\widetilde{x}^n)\in \widetilde{U}}
+actually define the same point in @f{M} when:
+@equation{
+\phi(x^1,\ldots,x^n) = \widetilde{\phi}(\widetilde{x}^1,\ldots,\widetilde{x}^n)
+}
+In other words, this happens under the following condition:
+@equation{
+(\widetilde{x}^1,\ldots,\widetilde{x}^n) = \widetilde{\phi}^{-1}(\phi(x^1,\ldots,x^n))
+}
+We will therefore define the ``gluing function'':
 @equation{
 \tau = \tilde{\phi}^{-1}\circ\phi
 }
 This @f{\tau} is a function from @f{U\in {\bf R}^n} to @f{\widetilde{U}\in {\bf R}^n}, therefore it
-has @f{n} components @f{\tau^1,\ldots,\tau^n}, each component being a function of @f{n} variables. We have:
+has @f{n} components @f{\tau^1,\ldots,\tau^n}, each component being a function of @f{n} variables:
 @equation{
 \tilde{x}^1 = \tau^1(x^1,\ldots,x^n)\;,\;\ldots\;,\;
 \tilde{x}^n = \tau^n(x^1,\ldots,x^n)
 }
-But what is the relation between @f{(v^1,\ldots,v^n)} and @f{(\tilde{v}^1,\ldots \tilde{v}^n)}? 
-Suppose we have a trajectory @f{f(t)}, and the coordinate functions of the trajectory  in the chart @f{U}
-are @f{f^1(t),\ldots,f^n(t)}. The components @f{v^j} of the corresponding tangent vector are given by
-Eq. (@ref{VComponents}).
-Then the coordinate functions of the same trajectory in the chart @f{\widetilde{U}}
-are:
-@equation[#:label "TildeFt"]{
-\tilde{f}^j(t) = \tau^j(f^1(t),\ldots,f^n(t))
-}
-The components @f{\tilde{v}} are, again, given by (@ref{VComponents}):
+@comment{when these equalities hold, @f{(x^1,\ldots,x^n)} and @f{(\tilde{x}^1,\ldots,\tilde{x}^n)} are
+actually the same point of @f{M}}
+
+@section{Gluing charts of @f{TM}: transition functions}
+Now let us consider the corresponding two charts of @f{TM}, namely the cylinders @f{U\times {\bf R}^n}
+and @f{\widetilde{U}\times {\bf R}^n}. Let us ask ourselves the quesion:
+@itemlist[
+@item{when do
+@f{(x^1,\ldots,x^n,v^1,\ldots,v^n)} and @f{(\tilde{x}^1,\ldots,\tilde{x}^n,\tilde{v}^1,\ldots,\tilde{v}^n)}
+determine the same point in @f{TM}?}]
+In other words, when 
+@f{\Phi(x^1,\ldots,x^n,v^1,\ldots,v^n)  = \widetilde{\Phi}(\tilde{x}^1,\ldots,\tilde{x}^n,\tilde{v}^1,\ldots,\tilde{v}^n)}?
+
+A straightforward considerations gives the following condition:
+@align[r.l.n
+ @list[
+@f{\left(\begin{array}{c}\tilde{x}^1\cr \ldots \cr \tilde{x}^n\end{array}\right)\;=}
+@f{\left(\begin{array}{c}\tau^1(\vec{x})\cr\ldots\cr\tau^n(\vec{x})\end{array}\right)\;}
+""
+]@list[
+@f{\left(\begin{array}{c}\tilde{v}^1\cr \ldots \cr \tilde{v}^n\end{array}\right)\;=}
+@f{\left(\begin{array}{c}\sum_{\mu=1}^n{\partial\tau^1(\vec{x})\over\partial x^{\mu}}v^{\mu}
+\cr\ldots\cr
+\sum_{\mu=1}^n{\partial\tau^n(\vec{x})\over\partial x^{\mu}}v^{\mu}\end{array}\right)\;}
+""
+]
+]
+@comment{when these equalities hold, @f{(x^1,\ldots,x^n,v^1,\ldots,v^n)} and 
+@f{(\tilde{x}^1,\ldots,\tilde{x}^n,\tilde{v}^1,\ldots,\tilde{v}^n)} are
+actually the same point of @f{TM}}
+
+@centered{@spn[redbox]{notice that the relation between @f{v^{\mu}} and @f{\tilde{v}^{\mu}} is linear}}
+We can write it in matrix notations:
 @equation{
-\tilde{v}^j = \left.{d\over dt}\right|_{t=0}\tilde{f}(t)
+\tilde{v}^{\mu} = {\partial \tau^{\mu}\over\partial x^{\nu}}v^{\nu}
 }
-Applying the chain rule to (@ref{TildeFt}) we get:
-@equation{
-\tilde{v}^j = \sum\limits_{k=1}^n {\partial\tau^j\over\partial x^k} v^k
-}
-To summarize:
-@div[redbox]{
-@f{(x^1,\ldots,x^n,\;v^1,\ldots v^n)} on the chart @f{\phi: U\to M} and
-@f{(\tilde{x}^1,\ldots,\tilde{x}^n,\;\tilde{v}^1,\ldots,\tilde{v}^n)} on the chart @f{\tilde{\phi}:\widetilde{U}\to M}
-actually represent the same point in @f{TM} when:
-@linebreak[]
-@f+0+4{\tilde{x}^j = \tau^j(x^1,\ldots,x^n)} and 
-@f-3+4{\tilde{v}^j = \sum\limits_{k=1}^n {\partial\tau^j(x^1,\ldots,x^n)\over\partial x^k} v^k}
-}
+The matrix @f{{\partial \tau^{\mu}\over\partial x^{\nu}}} is the @bold{transition function} of the tangent bundle.
 }
 
 @slide["Consistency condition on the transition functions" #:tag "TransitionFunctionsConsistency" #:showtitle #t]{
@@ -518,7 +477,7 @@ We have now three pairs of intersections: @f{U\cap \widetilde{U}}, @f{\widetilde
 @f{\widehat{U}\cap U}. This means that we have three transition functions @f{\tau_{[U\to \widetilde{U}]}}, 
 @f{\tau_{[\widetilde{U}\to\widehat{U}]}} and @f{\tau_{[\widehat{U}\to U]}}.}
 @hspace[2]
-@(image #:scale 0.75 (string->path "snapshots/three-charts.png"))
+@(image #:scale 0.75 (string->path "svg/three-charts.svg"))
 ]
 ]]
 This results in @bold{three} identification rules! The first two tell us that:
@@ -546,16 +505,9 @@ using @f{\phi:U\to M}}
 ]
 ]]
 @bold{Exercise @ex-num{TMTripleIntersection}:} show that the third gluing rule is compatible with the first two
-
-
 }
 
-@slide["Smooth maps and their derivatives" #:tag "DerivativeOfMap" #:showtitle #t]{
-@section{Definition of a smooth map between manifolds}
-A @bold{smooth map} @f{F:M\to N} between two manifolds is a set-theoretical map whose coordinate
-functions @f{F^j(x^1,\ldots,x^m)} are smooth functions. (This is independent of the choice of a chart.)
-
-Given two smooth maps @f{F:M\to N} and @f{G:N\to L}, the composition @f{G\circ F} is again a smooth map.
+@slide["Derivatives of maps" #:tag "DerivativeOfMap" #:showtitle #t]{
 @section{Derivative of a smooth map}
 For a smooth map @f{F:M\to N}, we will now define the @bold{derivative map} @f{F_*:TM\to TN}.
 
@@ -568,11 +520,11 @@ with the velocity @f{v}. We define @f{w} as the velocity vector of the trajector
 
 @bold{Exercise @ex-num{CorrectnessOfDefDerivativeMap}:} Show that this definition does not depend on
 the choice of a trajectory @f{f(t)} representing the velocity vector @f{v}; @italic{i.e.} any other trajectory 
-@f{g(t)} satisfying (@ref{oSmallOft}) would result in the same @f{w}.
+@f{g(t)} satisfying @f{g(t)=f(t)+o(t)} would result in the same @f{w}.
 
 @section{Formula for derivative in coordinates}
 Now, suppose that @f{x\in M} is covered by a chart @f{\phi:U\to M} and @f{F(x)\in N} is covered
-by a chart @f{\psi:V\to M}. Then we can calculate the coordinates of @f{w} using (@ref{VComponents})
+by a chart @f{\psi:V\to M}. Then we can calculate the coordinates of @f{w} 
 and express them through the coordinates of @f{v}. We get:
 @equation[#:label "DerivativeMapInCoordinates"]{
 F_*((x,v)) = \left(F^1(x),\ldots,F^n(x)\;,\; \sum\limits_k {\partial F^1\over \partial x^k} v^k,

@@ -1,1 +1,6 @@
-/home/andrei/usr/share/scribble/myscribbles/no-tocview.css
+.tocview { display:none; }
+.tocsub {
+  text-align: left;
+  margin-top: 0.0em;
+  background-color: #f0f0e0;
+}

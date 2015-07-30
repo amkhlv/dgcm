@@ -1,13 +1,13 @@
 #lang scribble/base
 @(require racket scribble/core scribble/base scribble/html-properties)
-@(require "defs_for-syntax.rkt" (for-syntax bystroTeX/slides_for-syntax))
-@(require "defs.rkt" bystroTeX/common bystroTeX/slides)
+
+@(require "defs.rkt" bystroTeX/common bystroTeX/slides (for-syntax bystroTeX/slides_for-syntax))
 @(require (only-in db/base disconnect))
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
 @(define bystro-conf   
    (bystro (bystro-connect-to-server #f "127.0.0.1" 29049 "svg")
-           "symplectic-and-poisson-structures_formulas.sqlite"  ; name for the database
+           "symplectic-and-poisson-structures/formulas.sqlite"  ; name for the database
            "symplectic-and-poisson-structures" ; directory where to store .png files of formulas
            21  ; formula size
            (list 255 255 255) ; formula background color
@@ -15,6 +15,7 @@
            1   ; automatic alignment adjustment
            0   ; manual alignment adjustment
            ))
+@(set-bystro-extension! bystro-conf "svg")
 @; This controls the single page mode:
 @(define singlepage-mode #f)
 @; ---------------------------------------------------------------------------------------------------

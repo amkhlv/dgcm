@@ -1,1 +1,13 @@
-/home/andrei/usr/share/scribble/myscribbles/no-margin.css
+/* ----------------------------------------------- */
+/* The ones below modify the default scribble.css: */
+
+.maincolumn {
+  font-size: 12pt;
+  width: 90%;
+/*  margin-right: -40em; */
+  margin-left: 2em;
+}
+
+
+
+        
