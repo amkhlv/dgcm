@@ -24,7 +24,7 @@
 
 @title[#:style '(no-toc no-sidebar)]{Manifolds}
 
-@table-of-contents[]
+@bystro-toc[]
 
 @linebreak[]
 @linebreak[]

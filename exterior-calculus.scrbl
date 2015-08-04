@@ -30,10 +30,10 @@
 
 @title[#:style '(no-toc no-sidebar)]{Exterior calculus}
 
-@table-of-contents[]
-
-
 @bystro-toc[]
+
+
+
 @linebreak[]
 @linebreak[]
 @hyperlink["../index.html"]{go back to main page}
@@ -309,7 +309,7 @@ T - A \;\;\in\;\; {R\otimes L\otimes L\otimes\cdots\otimes L + L\otimes R\otimes
 In other words any tensor is equivalent, in that sense, to some antisymmetric tensor.
 }
 
-@slide["Tensor algebra" #:tag "secTensorAlgebra" #:showtitle #t]{
+@slide["Tensor algebra" #:tag "TensorAlgebra" #:showtitle #t]{
 @table-of-contents[]
 @section{Definition of algebra}
 Definition of @spn[attn]{algebra} can be found @hyperlink["http://en.wikipedia.org/wiki/Algebra_over_a_field#Definition"]{on Wikipedia}.
@@ -405,13 +405,13 @@ Show that the wedge-product of a @f{p}-form and a @f{q}-form is given by:
 @slide["Summary" #:tag "SummaryOnExteriorAlgebra" #:showtitle #t]{
 We introduced the basic notions of exterior calculus.
 
-The main object is @seclink["GrassmannAlgebra"]{Grassmann Algebra}.
+We started with the definition of @seclink["GrassmannAlgebra"]{Grassmann Algebra}.
 
 @seclink["ExteriorForms1"]{Exterior form} is an antisymetric polylinear function, and they are
 @seclink["ExteriorVsGrassmann"]{in one-to-one correspondence} with elements of a Grassmann algebra.
 
 Polylinear functions are reduced to linear functions by the construction of 
-@seclink["TensorProducts"]{tensor product}. This also leads to the concept of @seclink["secTensorAlgebra"]{Free Algebra}
+@seclink["TensorProducts"]{tensor product}. This also leads to the concept of @seclink["TensorAlgebra"]{Free Algebra}
 — the algebra of tensors.
 
 @seclink["ExteriorProducts"]{Exterior product} of linear spaces can be defined as either a subspace,
@@ -426,6 +426,30 @@ the exterior product of spaces and exterior product of dual spaces. This brings 
 to @seclink["ExteriorForms1"]{antisymmetric polylinear functions}.
 }
 
+@slide["Other useful facts" #:tag "MoreFacts" #:showtitle #t]{
+Let @f{S_1,\ldots,S_n} be some sets, then:
+@equation{
+\mbox{Fun}(S_1,\ldots,S_n) = \mbox{Fun}(S_1)\otimes\cdots\otimes \mbox{Fun}(S_n)
+}
+Strictly speaking, with our definitions, this formula only works for @italic{finite} sets @f{S_1,\ldots,S_n}.
+
+@comment{For example, let us consider the following function on @f{{\bf R}^2 = {\bf R}\times{\bf R}}:
+@equation{
+f(x,y) = {1\over 1 + x^2 + y^2}\;\in \;\mbox{Fun}({\bf R}\times {\bf R})
+}
+Formally, we can write:
+@equation{
+f(x,y) = \sum_{n\geq 0} \sum_{m=0}^n (-1)^n {n!\over m!(n-m)!}x^{2m} y^{2(n-m)}
+}
+so we may say that it corresponds to:
+@equation{
+\sum_{n\geq 0} \sum_{m=0}^n (-1)^n {n!\over m!(n-m)!}x^{2m} \otimes y^{2(n-m)} \in \mbox{Fun}({\bf R})\otimes \mbox{Fun}({\bf R})
+\mbox{ \tt\small (wrong!)}
+}
+but this is wrong: with @seclink["TensorProducts"]{our definition of the tensor product}, we only allow finite sums!
+}
+
+}
 
 
 
