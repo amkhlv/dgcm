@@ -38,74 +38,8 @@
 @linebreak[]
 @hyperlink["../index.html"]{go back to main page}
 
-@slide["Grassmann algebra" #:tag "GrassmannAlgebra" #:showtitle #t]{
-@table-of-contents[]
+@slide["Polylinear Functions" #:tag "PolylinearFunctions" #:showtitle #t]{
 
-@section{@f{\theta}-words}
-Let us consider a set of letters: 
-@f{\theta^1}, … , @f{\theta^n}. Consider words composed of these letters, of the form:
-@equation{
-\theta^{i_1}\cdots \theta^{i_k} \;\;\mbox{ \small satisfying the condition: }\; 
-i_1<i_2<\ldots<i_k
-}
-@bold{Exercise @ex-num{NumberOfWords}:} show that there are @f{2^n} such words.
-
-@section{Algebra of @f{\theta}-words}
-@subsection{Linear combination of words}
-Consider formal linear combinations of @f{\theta}-words:
-@equation[#:label "LinearCombinationOfThetaWords"]{
-\Omega = \sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}
-}
-where @f{a_{i_1\ldots i_k}} are some real numbers.
-
-Such formal linear combinations have a natural structure of a linear space, because we can add them:
-@equation{
-\left(\sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) +
-\left(\sum_{i_1<i_2<\ldots<i_k} b_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) =
-\left(\sum_{i_1<i_2<\ldots<i_k} (a_{i_1\ldots i_k} + b_{i_1\ldots i_k}) \theta^{i_1}\cdots\theta^{i_k}\right) 
-}
-and multiply by numbers:
-@equation{
-c\left(\sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) =
-\left(\sum_{i_1<i_2<\ldots<i_k} ca_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) 
-}
-
-@subsection{Multiplication}
-Now we will @spn[attn]{define the operation of multiplication}. We will start by defining the
-multiplication of single words, and then extend this operation to the linear combinations
-of the form (@ref{LinearCombinationOfThetaWords}) by linearity. For single words, we define the product
-as follows:
-@equation{
-\theta^{i_1}\cdots \theta^{i_p}\;\cdot\; \theta^{j_1}\cdots \theta^{j_q} =
-\left\{
-\begin{array}{cl}
-0 & \mbox{ if } i_m = j_n \mbox{ for some } m \mbox{ and } n \cr
-(-1)^{\varepsilon} \theta^{k_1\ldots k_{p+q}} & \mbox{ otherwize }
-\end{array}
-\right\}
-}
-Here @f{\varepsilon} and @f{(k_1,\ldots,k_{p+q})} are defined as follows. Let us consider a sequence
-of natural numbers:
-@equation[#:label "SequenceWrongOrder"]{
-(i_1,i_2,\ldots,i_p,j_1,j_2,\ldots,j_q)
-}
-The sequence @f{(k_1,\ldots,k_{p+q})} is defined as the result of the ordering @f{k_1<\ldots<k_{p+q}} 
-of (@ref{SequenceWrongOrder}). Let @f{\pi\in S_{p+q}} denote the permutation which brings (@ref{SequenceWrongOrder})
-into @f{(k_1,\ldots,k_{p+q})}. We define @f{(-1)^{\varepsilon}} as the sign of this permutation.
-
-@bold{Exercise @ex-num{Associativity}:} Prove the associativity:
-@equation{
-(\theta^{i_1}\cdots\theta^{i_p}\;\cdot\;\theta^{j_1}\cdots\theta^{j_q})\;\cdot\;\theta^{k_1}\cdots\theta^{k_r}
-=
-\theta^{i_1}\cdots\theta^{i_p}\;\cdot\;(\theta^{j_1}\cdots\theta^{j_q}\;\cdot\;\theta^{k_1}\cdots\theta^{k_r})
-}
-
-}
-
-@slide["Exterior forms" #:tag "ExteriorForms1" #:showtitle #t]{
-@table-of-contents[]
-
-@section{Polylinear functions and exterior forms}
 Let @f{L} be a @bold{finite-dimensional linear space}, and @f{L^*} its dual space.
 
 @div[comment]{
@@ -135,37 +69,7 @@ which is denoted:
 (Why it is denoted like this will become clear later.)
 
 
-@section[#:tag "ExteriorVsGrassmann"]{Exterior forms and Grassmann algebra}
-We will denote @f{L^*} the dual linear space to @f{L},
-@italic{i.e.} the space of linear functions on @f{L}. Let us choose a basis @f{\{e_i|i\in \{1,\ldots,\mbox{dim}L\}\}}
-in @f{L}. Let us denote @f{\theta^i} the @bold{dual basis} in @f{L^*}. ``Dual basis'' means that:
-@equation{
-\theta^i(e_j) =\delta^i_j
-}
-Let us form a Grassmann algebra on the letters @f{\theta^i}. 
 
-For every word @f{\theta^{i_1}\cdots\theta^{i_k}}
-we will define the @bold{corresponding exterior form} (which we will also denote @f{\theta^{i_1}\cdots\theta^{i_k}})
-as follows:
-@equation{
-\theta^{i_1}\cdots\theta^{i_k}\;\;(v_1,\ldots,v_p,\ldots,v_q,\ldots,v_k) := 
-\sum_{\sigma\in S_k}\mbox{sign}(\sigma)\theta^{i_1}(v_{\sigma(1)})\cdots \theta^{i_k}(v_{\sigma(k)})
-}
-It is easy to see that the words @f{\theta^{i_1}\cdots\theta^{i_k}} form a basis in the space of exterior
-forms on @f{L}. 
-
-Therefore @spn[boldred]{exterior forms are elements of the Grassmann algebra}:
-@equation{
-\omega = \sum \omega_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}
-}
-
-We can therefore take the product @f{\omega_1\cdot\omega_2} of
-two exterior forms @f{\omega_1} and @f{\omega_2} (as elements of the Grassmann algebra).
-There is a traditional notation for this product:
-@centered{
-@spn[redbox]{@f-1+4{\omega_1\wedge\omega_2}} @hspace[5] @label["ExtProductFromGrassmann"]
-}
-(This means that instead of writing @f{\omega_1\cdots\omega_2} we will write @f{\omega_1\wedge\omega_2}.)
 }
 
 
@@ -307,6 +211,27 @@ T - A \;\;\in\;\; {R\otimes L\otimes L\otimes\cdots\otimes L + L\otimes R\otimes
 }
 ]
 In other words any tensor is equivalent, in that sense, to some antisymmetric tensor.
+
+@comment{Let us prove it. We will first prove the following statement: for any 
+@f{T\in L\otimes\cdots\otimes L}, we can always find an antisymmetric tensor @f{A}, such that the difference
+@f{T-A} is of the form:
+@equation{
+T-A = \sum_{\sigma\in S_k}\left({\bf 1} - (-)^{l(\sigma)}\sigma\right){T\over n!}
+}
+Indeed, @f{A = \sum_{\sigma\in S_k}(-)^{l(\sigma)}\sigma{T\over n!}} --- the @bold{antisymmetrization} of @f{T}.
+Let us consider a term in this sum. Any permutation @f{\sigma} of length @f{l(\sigma)} can be
+presented as a composition of the transposition @f{(j,j+1)} with some permutation @f{\tau} of the length @f{l(\tau) = l(\sigma)-1}:
+@equation{
+\sigma = (j,j+1)\circ \tau
+}
+Therefore we have:
+@equation{
+({\bf 1} - (-)^{l(\sigma)}\sigma)X_{\sigma} = (-)^{l(\tau)}({\bf 1} + (j,j+1))\tau X_{\sigma} + ({\bf 1} - (-)^{l(\tau)}\tau)X_{\sigma}
+}
+The first term on the right hand side is already in @f{L\otimes\cdots\otimes L\otimes R\otimes L\otimes\cdots\otimes L}. 
+As for the second term, notice that it is of the same form  as the left hand side but the length of @f{\tau} is less than the length of @f{\sigma},
+therefore proceed by induction in the length.
+}
 }
 
 @slide["Tensor algebra" #:tag "TensorAlgebra" #:showtitle #t]{
@@ -387,12 +312,10 @@ f_1\wedge\cdots\wedge f_k\;\;(v_1\wedge\cdots\wedge v_k) =  \sum\limits_{\pi\in 
 @bold{This is the definition which we will use.} 
 The difference with (@ref{BadDefinitionOfPairing}) is in the absence of @f{1\over k!} in front. 
 
-Observations:
 @itemlist[
 @item{Our definition @bold{does not} agree with the natural pairing between @f{L^*\otimes \cdots\otimes L^*} and @f{L\otimes\cdots\otimes L}
 which is given by (@ref{PairingBetweenTLDualAndTL}). We define  pairing between antisymmetric tensors in a special way, different
 from the definition of the pairing of generic tensors.}
-@item{Our definition does agree with the definition (@ref{ExtProductFromGrassmann}) which we gave earlier in the context of Grassmann algebras}
 ]
 @bold{Exercise @ex-num{ProductOfExtForms}:}
 Show that the wedge-product of a @f{p}-form and a @f{q}-form is given by:
@@ -402,13 +325,80 @@ Show that the wedge-product of a @f{p}-form and a @f{q}-form is given by:
 }
 }
 
+
+@slide["Grassmann algebra" #:tag "GrassmannAlgebra" #:showtitle #t]{
+@table-of-contents[]
+
+@section{@f{\theta}-words}
+Let us consider a set of letters: 
+@f{\theta^1}, … , @f{\theta^n}. Consider words composed of these letters, of the form:
+@equation{
+\theta^{i_1}\cdots \theta^{i_k} \;\;\mbox{ \small satisfying the condition: }\; 
+i_1<i_2<\ldots<i_k
+}
+@bold{Exercise @ex-num{NumberOfWords}:} show that there are @f{2^n} such words.
+
+@section{Algebra of @f{\theta}-words}
+@subsection{Linear combination of words}
+Consider formal linear combinations of @f{\theta}-words:
+@equation[#:label "LinearCombinationOfThetaWords"]{
+\Omega = \sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}
+}
+where @f{a_{i_1\ldots i_k}} are some real numbers.
+
+Such formal linear combinations have a natural structure of a linear space, because we can add them:
+@equation{
+\left(\sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) +
+\left(\sum_{i_1<i_2<\ldots<i_k} b_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) =
+\left(\sum_{i_1<i_2<\ldots<i_k} (a_{i_1\ldots i_k} + b_{i_1\ldots i_k}) \theta^{i_1}\cdots\theta^{i_k}\right) 
+}
+and multiply by numbers:
+@equation{
+c\left(\sum_{i_1<i_2<\ldots<i_k} a_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) =
+\left(\sum_{i_1<i_2<\ldots<i_k} ca_{i_1\ldots i_k} \theta^{i_1}\cdots\theta^{i_k}\right) 
+}
+
+@subsection{Multiplication}
+Now we will @spn[attn]{define the operation of multiplication}. We will start by defining the
+multiplication of single words, and then extend this operation to the linear combinations
+of the form (@ref{LinearCombinationOfThetaWords}) by linearity. For single words, we define the product
+as follows:
+@equation{
+\theta^{i_1}\cdots \theta^{i_p}\;\cdot\; \theta^{j_1}\cdots \theta^{j_q} =
+\left\{
+\begin{array}{cl}
+0 & \mbox{ if } i_m = j_n \mbox{ for some } m \mbox{ and } n \cr
+(-1)^{\varepsilon} \theta^{k_1\ldots k_{p+q}} & \mbox{ otherwize }
+\end{array}
+\right\}
+}
+Here @f{\varepsilon} and @f{(k_1,\ldots,k_{p+q})} are defined as follows. Let us consider a sequence
+of natural numbers:
+@equation[#:label "SequenceWrongOrder"]{
+(i_1,i_2,\ldots,i_p,j_1,j_2,\ldots,j_q)
+}
+The sequence @f{(k_1,\ldots,k_{p+q})} is defined as the result of the ordering @f{k_1<\ldots<k_{p+q}} 
+of (@ref{SequenceWrongOrder}). Let @f{\pi\in S_{p+q}} denote the permutation which brings (@ref{SequenceWrongOrder})
+into @f{(k_1,\ldots,k_{p+q})}. We define @f{(-1)^{\varepsilon}} as the sign of this permutation.
+
+@bold{Exercise @ex-num{Associativity}:} Prove the associativity:
+@equation{
+(\theta^{i_1}\cdots\theta^{i_p}\;\cdot\;\theta^{j_1}\cdots\theta^{j_q})\;\cdot\;\theta^{k_1}\cdots\theta^{k_r}
+=
+\theta^{i_1}\cdots\theta^{i_p}\;\cdot\;(\theta^{j_1}\cdots\theta^{j_q}\;\cdot\;\theta^{k_1}\cdots\theta^{k_r})
+}
+
+
+@section[#:tag "ExteriorVsGrassmann"]{Exterior algebra @f{=}  Grassmann algebra}
+The Grassmann algebra is the same as the exterior algebra @f{\Lambda L} where @f{L} is the linear
+space with the basis @f{\theta^1,\ldots,\theta^n}. We simply write @f{\theta^{i_1} \theta^{i_2}\cdots \theta^{i_p}}
+instead of @f{\theta^{i_1} \wedge \theta^{i_2} \wedge \cdots \wedge \theta^{i_p}}
+}
+
+
+
 @slide["Summary" #:tag "SummaryOnExteriorAlgebra" #:showtitle #t]{
-We introduced the basic notions of exterior calculus.
-
-We started with the definition of @seclink["GrassmannAlgebra"]{Grassmann Algebra}.
-
-@seclink["ExteriorForms1"]{Exterior form} is an antisymetric polylinear function, and they are
-@seclink["ExteriorVsGrassmann"]{in one-to-one correspondence} with elements of a Grassmann algebra.
+We introduced the basic notions of tensor calculus and exterior calculus.
 
 Polylinear functions are reduced to linear functions by the construction of 
 @seclink["TensorProducts"]{tensor product}. This also leads to the concept of @seclink["TensorAlgebra"]{Free Algebra}
@@ -418,12 +408,8 @@ Polylinear functions are reduced to linear functions by the construction of
 or a factorspace, of the tensor product. These two definitions are equivalent.
 
 When we try to @seclink["ExteriorAlgebra"]{repeat the definition of Free Algebra using exterior product} 
-instead of tensor product, we get the Grassmann Algebra which we already 
-@seclink["GrassmannAlgebra"]{introduced using @f{\theta}-words}.
+instead of tensor product, we get the @seclink["GrassmannAlgebra"]{Grassmann Algebra}.
 
-Finally, we observe that there is a @seclink["SubtletyInPairing"]{natural duality pairing} between
-the exterior product of spaces and exterior product of dual spaces. This brings us back
-to @seclink["ExteriorForms1"]{antisymmetric polylinear functions}.
 }
 
 @slide["Other useful facts" #:tag "MoreFacts" #:showtitle #t]{
