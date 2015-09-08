@@ -30,6 +30,8 @@
 
 @title[#:style '(no-toc no-sidebar)]{Exterior calculus}
 
+@table-of-contents[]
+
 @bystro-toc[]
 
 

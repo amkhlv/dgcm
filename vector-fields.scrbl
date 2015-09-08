@@ -218,7 +218,7 @@ f(g^{-s}_{[w]}\;\circ g^{-t}_{[v]}\;\circ g^s_{[w]}\;\; \circ g^t_{[v]}\;\;(x))
 A smooth map @f{M\to N} does not generally speaking act on vector fields, there is no such thing 
 as @f{f_*v}. 
 
-@div[comment]{
+@comment{
 If two points @f{x\in M} and @f{y\in M} are mapped to the same point @f{z = f(x) = f(y)}, then it is 
 not clear what to do with @f{(f_*(v))(z)} — should it be defined as @f{f_*(v(x))}? or @f{f_*(v(y))}? 
 or maybe @f{f_*(v(x)) + f_*(v(y))}?
@@ -236,14 +236,19 @@ From the definition (@ref{DefPushForwardVectorField}) follows:
 g^t_{[f_*v]} \;\;\;\;= f\circ g^t\circ f^{-1}
 }
 @(fsize+ (- 3))
-@div[comment]{
+@comment{
 Our notations are somewhat ``overloaded'', as @f{f_*} can stand for two different things:
 @tg[ol]{
 @tg[li]{For a @bold{vector} @f{v\in T_xM}, we denote @f{f_*v \in T_{f(x)}M} the action of the derivative map @f{f_*:TM\to TM}}
 @tg[li]{For a @bold{vector field} @f{v\in \Gamma(TM)}, we denote @f{f_*v \in \Gamma(TM)} the push-forward vector
 field as defined in Eq. (@ref{DefPushForwardVectorField})} 
 }
-But these are the standard notations. We can only hope that this does not lead to a confusion.
+But these are the standard notations. We hope that this does not lead to a confusion. Moreover, these two things
+are essentially the same: the push-forward of the vector field @f{v} by @f{f\;:\;M\to M} is point-wize the action
+of the derivative of @f{f}; this means that for any point @f{x\in M}:
+@equation{
+(f_*v)(x)  = f_*(v(f^{-1}(x)))
+}
 }
 @(fsize=)
 
@@ -257,16 +262,66 @@ This gives two equalities:
 
 }
 
+@slide["Tangent space is a functor" #:tag "TangentSpaceAsFunctor" #:showtitle #t]{
+For any smooth manifold @f{M} we can construct another smooth manifold: the tangent bundle @f{TM}. Moreover,
+for a smooth map @f{f\;:\;M\to N} there is a natural map @f{Tf\;:\;TM\to TN} defined as follows. For a point
+@f{(v,x)\in TM} (where @f{x\in M} and @f{v\in T_xM}) we define:
+@equation{
+Tf(v,x) = (f(x)_*v,f(x))
+}
+--- a point in @f{TN}.
+
+So, we defined the construction ``@f{T}'' on both object and morphisms. 
+
+@comment{
+Exercise: check that @f{Tf\circ Tg = T(f\circ g)}
+}
+
+This means that @f{T} is a functor from the category of smooth manifolds to itself. @smaller{(Actually to the
+category of vector bundles, but we will not need that refinement for now; any vector bundle is, in
+particular, a manifold.)}
+
+@comment{
+Exercise *: can you make sense of a cotangent space @f{T^*} as a functor? Would it be covariant or contravariant?
+}
+}
+
 @slide["Lie derivative on differential forms and vectors" #:tag "LieDerivativeOnForms" #:showtitle #t]{
+@section{Differential form is a function}
+We can view a @f{p}-form as a function
+@equation{
+\omega\;:\; TM\to {\bf R}
+}
+polilinear in the fiber. Or, better to say, a function  @f{\Lambda^pTM\to {\bf R}} @bold{linear in the fiber}:
+@equation{
+\omega\;:\; \Lambda^pTM\to {\bf R}
+}
+A point of @f{\Lambda^p TM} is a pair: @f{\left(\sum_j v_1^{(j)}\wedge\cdots\wedge v_p^{(j)}\;,\;x\right)}. We will write:
+@equation{
+\omega(v_1\wedge\cdots\wedge v_p\;,\;x)
+}
+
+A vector field @f{v\in \mbox{Vect}(M)} defines a one-parameter family of diffeomorphisms @f{g^t\;:\;M\to M}.
+As we explained, the construction of the tangent space is a covariant functor. Similarly, @f{M\mapsto \Lambda^pTM} is also
+a covariant functor. Let us apply it to the morphism @f{g^t}. We get a new morphism, which should obviously be
+called @f{\Lambda^pTg^t}:
+@align[r.l
+ @list[
+@f{\Lambda^pTg^t\;:\;} @f{\Lambda^pTM\to \Lambda^pTM}
+]@list[
+@f{\Lambda^pTg^t(x,\; v_1\wedge\cdots\wedge v_p)\;=\;} @f{(g^t(x),\;g^t(x)_*v_1\wedge\cdots\wedge g^t(x)_*v_p)}
+]
+]
+
 @section{Lie derivative on differential forms}
 It is defined as follows:
 @equation[#:label "DefLieDerivativeOnForms"]{
-{\cal L}_v \omega = \left.{d\over dt}\right|_{t=0} g^{t*}_{[v]}\;\omega
+{\cal L}_v \omega = \left.{d\over dt}\right|_{t=0} \omega\circ \Lambda^pTg^t
 }
 In other words:
 @equation{
-({\cal L}_v\, \omega)(w_1,\ldots,w_p) = 
-\left.{d\over dt}\right|_{t=0} \omega(\,g^{t}_{[v]*}\;\;\;w_1\;,\ldots,\;g^{t}_{[v]*}\;\;\;w_p)
+({\cal L}_v\, \omega)(w_1\wedge\ldots\wedge w_p\;,\;x) = 
+\left.{d\over dt}\right|_{t=0} \omega\left(\,g^{t}_{[v]}(x)_*\,w_1\wedge\ldots\wedge g^{t}_{[v]}(x)_*\,w_p\;,\;g_{[v]}^t(x)\right)
 }
 @bold{Theorem @th-num{LieOnDiffForm}:} 
 @equation[#:label "LieOfOmegaOfV"]{
