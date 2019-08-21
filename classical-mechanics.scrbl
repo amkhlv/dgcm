@@ -63,7 +63,7 @@ L = L\left(x, {dx\over dt},\ldots,{d^n x\over dt^n}\right)
 }
 Then the variation of the action on the classical trajectory is zero provided that:
 @equation[#:label "BoundaryConditionsOnVariation"]{
-{d^k x\over dt^k}(t_{in}) = {d^k x\over dt^k}(t_{fin}) = 0 \quad \mbox{ for } k\in \{0,1,\ldots,n-1\}
+{d^k \delta x\over dt^k}(t_{in}) = {d^k \delta x\over dt^k}(t_{fin}) = 0 \quad \mbox{ for } k\in \{0,1,\ldots,n-1\}
 }
 
 }

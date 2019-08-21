@@ -207,7 +207,7 @@ is the commutator of the vector fields:
 @(fsize+ (- 5))
 @div[comment]{
 The sign @f{(-1)^{({\rm rk}(\psi)+1){\rm rk}(\phi_1)}} in (@ref{GbrDer2}) may appear strange. We are pushing the @italic{operation}
-@f{@(gbl)\psi,\bullet@(gbr)} ``through'' @f{\phi_1}. The operation @f{@(gbl)\psi,\bullet@(gbr)} is of the rank @f{{\rm rk}(\psi) + 1}.
+@f{@(gbl)\psi,\bullet@(gbr)} ``through'' @f{\phi_1}. The operation @f{@(gbl)\psi,\bullet@(gbr)} is of the rank @f{{\rm rk}(\psi) - 1}.
 }
 @fsize=[]
 These defining properties allows to calculate the Schouten bracket for aritrary wedge products of vectors:
