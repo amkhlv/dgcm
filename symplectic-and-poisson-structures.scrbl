@@ -6,7 +6,7 @@
 @; ---------------------------------------------------------------------------------------------------
 @; User definitions:
 @(define bystro-conf   
-   (bystro (bystro-connect-to-server #f "127.0.0.1" 29049 "svg")
+   (bystro (bystro-connect-to-server (build-path (find-system-path 'home-dir) ".config" "amkhlv" "latex2svg.xml"))
            "symplectic-and-poisson-structures/formulas.sqlite"  ; name for the database
            "symplectic-and-poisson-structures" ; directory where to store .png files of formulas
            21  ; formula size
